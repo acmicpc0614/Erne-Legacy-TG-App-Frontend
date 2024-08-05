@@ -31,7 +31,7 @@ export default function QuestList() {
   return (
     <div className="max-h-[75vh] max-sm:max-h-[75vh] overflow-auto p-5">
       <ToastContainer />
-      <div className="flex flex-col justify-center items-center">
+      <div className="flex flex-col justify-between items-center">
         <h1 className=" text-white text-3xl">Invite friends!</h1>
         <p className=" text-white">You and your friend will receive bonuses</p>
       </div>
@@ -75,7 +75,7 @@ export default function QuestList() {
           </select>
         </div>
       </div>
-      <div className="flex justify-center items-center align-middle w-full h-12 mt-8">
+      <div className="flex justify-between items-center align-middle w-full h-12 mt-8">
         <div className="w-[90%] h-12 bg-indigo-600 text-white rounded-[20px] flex items-center justify-center hover:bg-indigo-400">
           <span className="flex justify-center items-center">
             Invite Friend

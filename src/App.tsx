@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {isMobile} from 'react-device-detect';
 import "./App.css";
 import { useState, useEffect } from "react";
 import Home from "./page/Home";
@@ -25,7 +26,7 @@ function App() {
       {loading ? (
         <Loading />
       ) : (
-        <div className="App w-[700px] h-[75vh] max-sm:w-[750px] max-sm:h-[70vh]">
+        <div className="App w-[750px] flex flex-col relative">
           <ReduxProvider store={store}>
             <Routes>
               <Route path="/" element={<Layout />}>

@@ -28,19 +28,20 @@ function Home() {
   const [remainedEnergy, setRemainedEnergy] = useState<number>(energyState);
   const [limit, setLimit] = useState<number>(limitState);
   useEffect(() => {
-    const webapp = (window as any).Telegram?.WebApp.initDataUnsafe;
+    setUsername("telegram")
+    // const webapp = (window as any).Telegram?.WebApp.initDataUnsafe;
     // console.log("=========>webapp", webapp);
-    if (webapp) {
+    // if (webapp) {
 
-      setUsername(webapp["user"]["username"]);
-      axios.post(`/earnings/add`, {username: webapp["user"]["username"]})
-      dispatch(insertWallet(webapp["user"]["username"]));
-      dispatch(getWallet(webapp["user"]["username"])).then(() => {
-        setTap(tapState);
-        setToken(tokenState);
-        setRemainedEnergy(energyState);
-      });
-    }
+    //   setUsername(webapp["user"]["username"]);
+    //   axios.post(`/earnings/add`, {username: webapp["user"]["username"]})
+    //   dispatch(insertWallet(webapp["user"]["username"]));
+    //   dispatch(getWallet(webapp["user"]["username"])).then(() => {
+    //     setTap(tapState);
+    //     setToken(tokenState);
+    //     setRemainedEnergy(energyState);
+    //   });
+    // }
   }, []);
   console.log("---Telegram info----->", username);
   useEffect(() => {
@@ -133,8 +134,7 @@ function Home() {
       <ToastContainer />
       <CountDate date={3} />
       <div
-        id="mainWindow"
-        className="relative mt-8 flex flex-col items-center justify-center w-full h-[62vh] mb-9"
+        className="relative mt-8 flex flex-col items-center justify-center w-full h-[62vh] mb-9 overflow-y-auto"
       >
         <div className="flex flex-col justify-center items-center mb-7">
           <div className="flex justify-center items-center">
@@ -148,13 +148,13 @@ function Home() {
           </h1>
         </div>
         <div>
-          <img
+          {/* <img
             src="/image/shape.png"
             alt=""
             className="absolute z-10 left-0 top-[-50px]"
-          />
+          /> */}
           <div
-            className={`relative bg-[url('/image/mikeToken.png')] rounded-full bg-cover z-50 w-[400px] h-[400px] max-sm:w-[280px] max-sm:h-[280px] z-10 ${
+            className={`relative bg-[url('/image/Bitmap3.png')] mb-7 rounded-full bg-cover z-50 w-[400px] h-[400px] max-sm:w-[280px] max-sm:h-[280px] z-10 ${
               remainedEnergy > 0
                 ? "cursor-pointer"
                 : "cursor-not-allowed opacity-50"
