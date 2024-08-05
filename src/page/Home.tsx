@@ -12,7 +12,7 @@ import {
   insertWallet,
   updateWallet,
   updateEnergy,
-  getWallet,
+  getWallet
 } from "../store/reducers/wallet";
 function Home() {
   const audio = new Audio(soundEffect);
@@ -28,7 +28,14 @@ function Home() {
   const [remainedEnergy, setRemainedEnergy] = useState<number>(energyState);
   const [limit, setLimit] = useState<number>(limitState);
   useEffect(() => {
-    setUsername("telegram")
+    setUsername("telegram");
+    axios.post(`/earnings/add`, { username: "telegram" });
+    dispatch(insertWallet("telegram"));
+    dispatch(getWallet("telegram")).then(() => {
+      setTap(tapState);
+      setToken(tokenState);
+      setRemainedEnergy(energyState);
+    });
     // const webapp = (window as any).Telegram?.WebApp.initDataUnsafe;
     // console.log("=========>webapp", webapp);
     // if (webapp) {
@@ -130,12 +137,10 @@ function Home() {
   console.log("imgStatus", imgStatus);
 
   return (
-    <div className=" mt-8">
+    <div className="mt-8">
       <ToastContainer />
       <CountDate date={3} />
-      <div
-        className="relative mt-8 flex flex-col items-center justify-center w-full h-[62vh] mb-9 overflow-y-auto"
-      >
+      <div className="relative mt-8 flex flex-col items-center w-full mb-9">
         <div className="flex flex-col justify-center items-center mb-7">
           <div className="flex justify-center items-center">
             <img src="image/money-bag.png" alt="" className=" w-5 h-5" />
@@ -165,9 +170,9 @@ function Home() {
             onClick={handleTap}
           />
         </div>
-        <div className="flex flex-col justify-center items-center content-center ">
-          <div className="flex justify-around w-full align-middle gap-5">
-            <h3 className="text-xl mb-2 text-white w-[15vw]">
+        <div className="flex flex-row justify-between w-full px-8 max-sm:px-4 mt-4">
+          <div className="flex justify-between w-full">
+            <h3 className="flex justify-center items-center text-2xl mb-2 text-white flex flex-row">
               <span className="text-3xl ">
                 <img
                   src="/image/icon/lightning.svg"
@@ -178,8 +183,7 @@ function Home() {
               <span className="text-xl text-white">{remainedEnergy}</span> /{" "}
               {limit}
             </h3>
-            <ProgressBar value={remainedEnergy / 10} />
-            <div className="flex justify-center items-center w-[15vw]">
+            <div className="flex justify-center items-center">
               <Link to="/boost" className="flex">
                 <img
                   src="/image/rocket.png"
@@ -191,6 +195,7 @@ function Home() {
             </div>
           </div>
         </div>
+        <ProgressBar value={remainedEnergy / 10} />
       </div>
     </div>
   );
