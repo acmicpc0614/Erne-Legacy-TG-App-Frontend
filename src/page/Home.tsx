@@ -22,6 +22,7 @@ function Home() {
   const tapState = useSelector((state) => state.wallet.user?.tap);
   const limitState = useSelector((state) => state.wallet.user?.limit);
   const totalState = useSelector((state) => state.wallet.user?.totalPoint);
+  const levelState = useSelector((state) => state.wallet.user?.level);
 
   const [imgStatus, setImgStatus] = useState(false);
   const [tap, setTap] = useState<number>(tapState);
@@ -30,6 +31,7 @@ function Home() {
   const [remainedEnergy, setRemainedEnergy] = useState<number>(energyState);
   const [limit, setLimit] = useState<number>(limitState);
   const [total, setTotal] = useState<number>(totalState);
+  const [level, setLevel] = useState<number>(levelState);
 
   // const [tapUnit, setTapUnit] = useState<number>(0);
   useEffect(() => {
@@ -156,7 +158,10 @@ function Home() {
             {formatNumberWithCommas(token)}
           </h1>
           <h1 className="text-5xl text-white">
-            {formatNumberWithCommas(totalState)}
+            total : {formatNumberWithCommas(totalState)}
+          </h1>
+          <h1 className="text-5xl text-white">
+            level : {formatNumberWithCommas(levelState)}
           </h1>
         </div>
         <div>
