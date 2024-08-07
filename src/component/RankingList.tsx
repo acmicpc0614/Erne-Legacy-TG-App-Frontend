@@ -12,6 +12,16 @@ export default function RankingList() {
   function formatNumberWithCommas(number: number, locale = "en-US") {
     return new Intl.NumberFormat(locale).format(number);
   }
+
+  const findUserRank = (username: string) => {
+    for (let i = 0; i < usersa.length; i++)
+      if (usersa[i].username === username) return i + 1;
+  };
+
+  const findUserGDP = (username: string) => {
+    for (let i = 0; i < usersa.length; i++)
+      if (usersa[i].username === username) return usersa[i].totalPoint;
+  };
   return (
     <div className="md:w-full h-[65vh] mx-auto p-4">
       <div className="max-h-[50vh] max-sm:max-h-[50vh] overflow-auto">
@@ -61,16 +71,16 @@ export default function RankingList() {
       <div
         className={`flex my-3 px-3 py-2 items-center bg-[#5A4C3B] rounded-lg`}
       >
-        <div className="text-xl text-start pl-2 w-[20%] text-white">1</div>
+        <div className="text-xl text-start pl-2 w-[20%] text-white">
+          {findUserRank("telegram")}
+        </div>
         <div className="relative h-12 overflow-hidden w-[60%] flex items-center">
           <img src="/image/Bitmap3.png" alt="avatar" className="w-10 h-10" />
-          <p className="text-xl text-start pl-2 text-white">
-            {usersa[0]?.username}
-          </p>
+          <p className="text-xl text-start pl-2 text-white">telegram</p>
         </div>
 
         <p className="text-xl text-start pl-2 w-[30%] text-white">
-          {formatNumberWithCommas(usersa[0]?.totalPoint)}
+          {findUserGDP("telegram")}
         </p>
       </div>
     </div>
