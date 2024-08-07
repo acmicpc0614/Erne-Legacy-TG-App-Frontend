@@ -23,6 +23,10 @@ function Home() {
   const limitState = useSelector((state) => state.wallet.user?.limit);
   const totalState = useSelector((state) => state.wallet.user?.totalPoint);
   const levelState = useSelector((state) => state.wallet.user?.level);
+  const passItemLevel = useSelector(
+    (state) => state.wallet.user?.passItemLevel
+  );
+  const lastTimeState = useSelector((state) => state.wallet.user?.lastTime);
 
   const [imgStatus, setImgStatus] = useState(false);
   const [tap, setTap] = useState<number>(tapState);
@@ -31,7 +35,7 @@ function Home() {
   const [remainedEnergy, setRemainedEnergy] = useState<number>(energyState);
   const [limit, setLimit] = useState<number>(limitState);
   const [total, setTotal] = useState<number>(totalState);
-  const [level, setLevel] = useState<number>(levelState);
+  const [lastTime, setLastTime] = useState<number>(lastTimeState);
 
   // const [tapUnit, setTapUnit] = useState<number>(0);
   useEffect(() => {
@@ -57,8 +61,25 @@ function Home() {
     //     setRemainedEnergy(energyState);
     //   });
     // }
+    const miningInterval = setInterval(() => {
+      // 1723033669157
+      //       6501001
+      // 1723027200
+      setToken((prevToken) => {
+        const tmp = prevToken + getBounsFromPassItem(passItemLevel, lastTime);
+        return tmp;
+      });
+
+      setTotal((prevTotal) => {
+        const tmp = prevTotal + getBounsFromPassItem(passItemLevel, lastTime);
+        return tmp;
+      });
+    }, 10000); // Mine every second
+    return () => {
+      clearInterval(miningInterval);
+    };
   }, []);
-  console.log("---Telegram info----->", username);
+  // console.log("---Telegram info----->", username);
   useEffect(() => {
     setLimit(limitState);
   }, [limitState]);
@@ -112,12 +133,16 @@ function Home() {
   };
   useEffect(() => {
     const interval = setInterval(() => {
-      console.log("-information---->", username, remainedEnergy);
-      if (remainedEnergy < limit) {
-        dispatch(updateEnergy(username, remainedEnergy + 1));
+      if (remainedEnergy < limit && remainedEnergy > 0) {
+        // dispatch(updateEnergy(username, remainedEnergy + 1));
       }
-    }, 3000);
+    }, 1000);
     return () => clearInterval(interval);
+    // const interval = setTimeout(() => {
+    //   if (remainedEnergy < limit && remainedEnergy > 0) {
+    //     dispatch(updateEnergy(username, remainedEnergy + 1));
+    //   }
+    // });
   }, [username, remainedEnergy, limit]);
 
   const handleTap = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -140,7 +165,17 @@ function Home() {
   const handleMouseLeave = () => {
     setImgStatus(false);
   };
-  console.log("imgStatus", imgStatus);
+
+  const PassItemCount = [0, 1, 2, 3, 4, 5];
+
+  const getBounsFromPassItem = (level: number, lastTime: number) => {
+    console.log("lastTime =>", lastTime);
+    console.log("curtTime =>", Date.now());
+    let deltaTime = Math.floor((Date.now() - lastTime) / 1000);
+    let tmp = PassItemCount[level] * deltaTime;
+    console.log("getBounsFromPassItem =>", deltaTime);
+    return tmp;
+  };
 
   return (
     <div className="mt-8">
@@ -157,12 +192,15 @@ function Home() {
           <h1 className="text-5xl text-white">
             {formatNumberWithCommas(token)}
           </h1>
-          <h1 className="text-5xl text-white">
-            total : {formatNumberWithCommas(totalState)}
-          </h1>
-          <h1 className="text-5xl text-white">
-            level : {formatNumberWithCommas(levelState)}
-          </h1>
+          <div className="flex flex-row gap-10">
+            <h5 className="text-xl text-white">
+              GDP : {formatNumberWithCommas(totalState)}
+            </h5>
+
+            <h5 className="text-xl text-white">
+              level : {formatNumberWithCommas(levelState)}
+            </h5>
+          </div>
         </div>
         <div>
           <div

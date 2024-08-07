@@ -4,11 +4,17 @@ import { getAllUsers } from "../store/reducers/wallet";
 export default function RankingList() {
   const users_state = useSelector((state) => state.wallet.users);
   const [usersa, setUsers] = useState(users_state);
+  // useEffect(() => {
+  //   dispatch(getAllUsers()).then(() => {
+  //     setUsers(usersa);
+  //   });
+  // }, [users_state]);
   useEffect(() => {
+    console.log("getallusers calling...");
     dispatch(getAllUsers()).then(() => {
       setUsers(usersa);
     });
-  }, [users_state]);
+  }, []);
   function formatNumberWithCommas(number: number, locale = "en-US") {
     return new Intl.NumberFormat(locale).format(number);
   }

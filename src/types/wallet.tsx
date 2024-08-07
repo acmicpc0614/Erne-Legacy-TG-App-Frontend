@@ -7,6 +7,8 @@ export interface walletProfile {
   tap: number;
   limit: number;
   level: number;
+  passItemLevel: number;
+  lastTime: number;
 }
 export interface walletStateProps {
   user: walletProfile;

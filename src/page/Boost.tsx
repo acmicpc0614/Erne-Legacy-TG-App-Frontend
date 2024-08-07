@@ -1,6 +1,11 @@
 import { dispatch, useSelector } from "../store";
 import { toast, ToastContainer } from "react-toastify";
-import { updateEnergy, updateLimit, updateTap } from "../store/reducers/wallet";
+import {
+  buyBonusCard,
+  updateEnergy,
+  updateLimit,
+  updateTap,
+} from "../store/reducers/wallet";
 import { useEffect, useState } from "react";
 import Modal from "../component/modal";
 export default function Boost() {
@@ -8,10 +13,12 @@ export default function Boost() {
   const username_state = useSelector((state) => state.wallet.user?.username);
   const limit_state = useSelector((state) => state.wallet.user?.limit);
   const tap_state = useSelector((state) => state.wallet.user?.tap);
+
   const [token, setToken] = useState<number>(tokenState);
   const [username, setUsername] = useState<string>(username_state);
   const [limit, setLimit] = useState<number>(limit_state);
   const [tap, setTap] = useState<number>(tap_state);
+
   useEffect(() => {
     setToken(tokenState);
     setUsername(username_state);
@@ -29,15 +36,20 @@ export default function Boost() {
     toast.success("Successfully updated energy!");
     setIsModalOpen(false);
   };
-  const handleMultiTap = () => {
-    dispatch(updateTap(username, tap * 2));
-    setIsTapModalOpen(false);
-    toast.success("Successfully updated tap!");
-  };
-  const handleLimit = () => {
-    dispatch(updateLimit(username, limit * 2));
-    setIsLimitModalOpen(false);
-    toast.success("Successfully updated limit!");
+  // const handleMultiTap = () => {
+  //   dispatch(updateTap(username, tap * 2));
+  //   setIsTapModalOpen(false);
+  //   toast.success("Successfully updated tap!");
+  // };
+  // const handleLimit = () => {
+  //   dispatch(updateLimit(username, limit * 2));
+  //   setIsLimitModalOpen(false);
+  //   toast.success("Successfully updated limit!");
+  // };
+  const handleBonusClick = () => {
+    dispatch(buyBonusCard(username ? username : "telegram"));
+    setIsBonusModalOpen(false);
+    toast.success("Successfully purchase card.");
   };
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const handleMouseClick = () => {
@@ -46,20 +58,29 @@ export default function Boost() {
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
-  const [isTapModalOpen, setIsTapModalOpen] = useState<boolean>(false);
-  const handleMouseTapClick = () => {
-    setIsTapModalOpen(true);
-  };
-  const handleCloseTapModal = () => {
-    setIsTapModalOpen(false);
-  };
 
-  const [isLimitModalOpen, setIsLimitModalOpen] = useState<boolean>(false);
-  const handleMouseLimitClick = () => {
-    setIsLimitModalOpen(true);
+  // const [isTapModalOpen, setIsTapModalOpen] = useState<boolean>(false);
+  // const handleMouseTapClick = () => {
+  //   setIsTapModalOpen(true);
+  // };
+  // const handleCloseTapModal = () => {
+  //   setIsTapModalOpen(false);
+  // };
+
+  // const [isLimitModalOpen, setIsLimitModalOpen] = useState<boolean>(false);
+  // const handleMouseLimitClick = () => {
+  //   setIsLimitModalOpen(true);
+  // };
+  // const handleCloseLimitModal = () => {
+  //   setIsLimitModalOpen(false);
+  // };
+
+  const [isBonusModalOpen, setIsBonusModalOpen] = useState<boolean>(false);
+  const handleMouseBonusClick = () => {
+    setIsBonusModalOpen(true);
   };
-  const handleCloseLimitModal = () => {
-    setIsLimitModalOpen(false);
+  const handleCloseBonusModal = () => {
+    setIsBonusModalOpen(false);
   };
   return (
     <div className="Boost max-w-full text-white mt-12">
@@ -85,13 +106,14 @@ export default function Boost() {
           <img src="/image/icon/lightning.svg" alt="" className="w-10 h-10" />
           <div className="flex flex-col">
             <h3 className="text-2xl text-white">Full energy</h3>
-            <h3 className="text-xl text-[#a8a8a7]">6/6 available</h3>
+            <h3 className="text-xl text-[#a8a8a7]">1/1 available</h3>
           </div>
         </div>
         <div className="flex justify-start">
           <h1 className="text-white text-xl">Boosters</h1>
         </div>
-        <div
+
+        {/* <div
           className={`flex my-3 px-5 py-3 items-center bg-[#4d4d4c] rounded-[30px] gap-2 hover:bg-[#3a3a3a]`}
           onClick={handleMouseTapClick}
         >
@@ -116,6 +138,20 @@ export default function Boost() {
               <h3>2K * 2M</h3>
             </div>
           </div>
+        </div> */}
+
+        <div
+          className={`flex my-3 px-5 py-3 items-center bg-[#4d4d4c] rounded-[30px] gap-2 hover:bg-[#3a3a3a]`}
+          onClick={handleMouseBonusClick}
+        >
+          <img src="/image/bonus.png" alt="" className="w-10 h-10" />
+          <div className="flex flex-col gap-1">
+            <h3 className="text-2xl text-white text-left">Passive Earnings</h3>
+            <div className="flex gap-3 align-middle">
+              <img src="/image/dollar.png" alt="" className="w-5 h-5" />
+              <h3>1k nessessary</h3>
+            </div>
+          </div>
         </div>
       </div>
       <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
@@ -137,7 +173,7 @@ export default function Boost() {
           </div>
         </div>
       </Modal>
-      <Modal isOpen={isTapModalOpen} onClose={handleCloseTapModal}>
+      {/* <Modal isOpen={isTapModalOpen} onClose={handleCloseTapModal}>
         <div className="flex flex-col items-center align-middle gap-3">
           <img src="image/double-tap.png" alt="" className=" w-12 h-12" />
           <h1 className="text-2xl text-white">Multi-Tap</h1>
@@ -172,6 +208,25 @@ export default function Boost() {
             onClick={handleLimit}
           >
             <span className="flex justify-center items-center">Go ahead</span>
+          </div>
+        </div>
+      </Modal> */}
+      <Modal isOpen={isBonusModalOpen} onClose={handleCloseBonusModal}>
+        <div className="flex flex-col items-center align-middle gap-3">
+          <img src="image/bonus.png" alt="" className=" w-12 h-12" />
+          <h1 className="text-2xl text-white">Passive Earning</h1>
+          <p className=" text-sm text-white">
+            You can get bonus coins with combo cards.
+          </p>
+          <div className="flex items-center">
+            <img src="image/dollar.png" alt="" className=" w-14 h-14" />
+            <h1 className="text-white text-2xl">&nbsp;1000</h1>
+          </div>
+          <div
+            className="w-full h-9 bg-indigo-600 text-white rounded-[20px] flex justify-center items-center"
+            onClick={handleBonusClick}
+          >
+            <span className="flex justify-center items-center">Buy</span>
           </div>
         </div>
       </Modal>
