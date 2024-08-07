@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { isMobile } from "react-device-detect";
+// import { isMobile } from "react-device-detect";
 import "./App.css";
 import { useState, useEffect } from "react";
 import Home from "./page/Home";

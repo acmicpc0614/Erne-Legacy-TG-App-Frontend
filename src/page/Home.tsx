@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import CountDate from "../component/CountDate";
+// import CountDate from "../component/CountDate";
 import ProgressBar from "../component/ProgressBar";
 import { dispatch, useSelector } from "../store";
 import soundEffect from "../../public/effect/water.wav";
@@ -11,9 +11,11 @@ import axios from "../utils/api";
 import {
   insertWallet,
   updateWallet,
-  updateEnergy,
+  // updateEnergy,
   getWallet,
 } from "../store/reducers/wallet";
+import ScoreBoard from "../component/ScoreBoard";
+
 function Home() {
   const PassItemCount = [0, 1, 2, 3, 4, 5];
 
@@ -37,7 +39,7 @@ function Home() {
   const [remainedEnergy, setRemainedEnergy] = useState<number>(energyState);
   const [limit, setLimit] = useState<number>(limitState);
   const [total, setTotal] = useState<number>(totalState);
-  const [lastTime, setLastTime] = useState<number>(lastTimeState);
+  // const [lastTime, setLastTime] = useState<number>(lastTimeState);
 
   // const [tapUnit, setTapUnit] = useState<number>(0);
   useEffect(() => {
@@ -65,9 +67,6 @@ function Home() {
     // }
     if (passItemLevel > 0) {
       const miningInterval = setInterval(() => {
-        // 1723033669157
-        //       6501001
-        // 1723027200 getBounsFromPassItem(passItemLevel, lastTime)
         setToken((prevToken) => {
           const tmp = prevToken + PassItemCount[passItemLevel];
           return tmp;
@@ -178,19 +177,23 @@ function Home() {
   return (
     <div className="mt-8">
       <ToastContainer />
-      <CountDate date={1} />
+      <ScoreBoard tapUnit={1} gdp={total} />
+      {/* <CountDate date={1} />   */}
       <div className="relative mt-8 flex flex-col items-center w-full mb-9">
         <div className="flex flex-col justify-center items-center mb-7">
-          <div className="flex justify-center items-center">
+          {/* <div className="flex justify-center items-center">
             <img src="image/money-bag.png" alt="" className=" w-5 h-5" />
             <h3 className="text-xl font-bold text-[#fff243]">
               &nbsp;&nbsp;Mystery laughter
             </h3>
+          </div> */}
+          <div className="flex flex-row gap-3 items-center">
+            <img src="/image/money-bag.png" alt="" className="w-10 h-10" />
+            <h1 className="text-5xl text-white">
+              {formatNumberWithCommas(token)}
+            </h1>
           </div>
-          <h1 className="text-5xl text-white">
-            {formatNumberWithCommas(token)}
-          </h1>
-          <div className="flex flex-row gap-10">
+          {/* <div className="flex flex-row gap-10">
             <h5 className="text-xl text-white">
               GDP : {formatNumberWithCommas(total)}
             </h5>
@@ -198,7 +201,7 @@ function Home() {
             <h5 className="text-xl text-white">
               level : {formatNumberWithCommas(levelState)}
             </h5>
-          </div>
+          </div> */}
         </div>
         <div>
           <div
