@@ -1,14 +1,16 @@
 export interface walletProfile {
-    _id: string;
-    username: string;
-    balance: number;
-    energy: number;
-    tap: number;
-    limit: number;
+  _id: string;
+  username: string;
+  totalPoint: number;
+  balance: number;
+  energy: number;
+  tap: number;
+  limit: number;
+  level: number;
 }
 export interface walletStateProps {
-    user: walletProfile;
-    users: walletProfile[];
-    friend: boolean;
-    error: object | string | null;
+  user: walletProfile;
+  users: walletProfile[];
+  friend: boolean;
+  error: object | string | null;
 }

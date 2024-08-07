@@ -12,7 +12,7 @@ import {
   insertWallet,
   updateWallet,
   updateEnergy,
-  getWallet
+  getWallet,
 } from "../store/reducers/wallet";
 function Home() {
   const audio = new Audio(soundEffect);
@@ -21,12 +21,17 @@ function Home() {
   const energyState = useSelector((state) => state.wallet.user?.energy);
   const tapState = useSelector((state) => state.wallet.user?.tap);
   const limitState = useSelector((state) => state.wallet.user?.limit);
+  const totalState = useSelector((state) => state.wallet.user?.totalPoint);
+
   const [imgStatus, setImgStatus] = useState(false);
   const [tap, setTap] = useState<number>(tapState);
   const [username, setUsername] = useState<string>(usernameState);
   const [token, setToken] = useState<number>(tokenState);
   const [remainedEnergy, setRemainedEnergy] = useState<number>(energyState);
   const [limit, setLimit] = useState<number>(limitState);
+  const [total, setTotal] = useState<number>(totalState);
+
+  // const [tapUnit, setTapUnit] = useState<number>(0);
   useEffect(() => {
     setUsername("telegram");
     axios.post(`/earnings/add`, { username: "telegram" });
@@ -34,6 +39,7 @@ function Home() {
     dispatch(getWallet("telegram")).then(() => {
       setTap(tapState);
       setToken(tokenState);
+      setTotal(totalState);
       setRemainedEnergy(energyState);
     });
     // const webapp = (window as any).Telegram?.WebApp.initDataUnsafe;
@@ -108,21 +114,19 @@ function Home() {
       if (remainedEnergy < limit) {
         dispatch(updateEnergy(username, remainedEnergy + 1));
       }
-    }, 216000);
+    }, 3000);
     return () => clearInterval(interval);
   }, [username, remainedEnergy, limit]);
 
   const handleTap = (event: React.MouseEvent<HTMLDivElement>) => {
     audio.play();
-    if (remainedEnergy > 0 && token < 1000) {
+    if (remainedEnergy > 0) {
       setScore(`+${tap}`);
-      if (token + tap > 1000) {
-        setToken(1000);
-        dispatch(updateWallet(username, 1000, remainedEnergy - 1));
-      } else {
-        setToken(token + tap);
-        dispatch(updateWallet(username, token + tap, remainedEnergy - 1));
-      }
+      setToken(token + tap);
+      setTotal(total + tap);
+      dispatch(
+        updateWallet(username, total + tap, token + tap, remainedEnergy - 1)
+      );
       setRemainedEnergy(remainedEnergy - 1);
       handleClick(event);
     }
@@ -151,15 +155,13 @@ function Home() {
           <h1 className="text-5xl text-white">
             {formatNumberWithCommas(token)}
           </h1>
+          <h1 className="text-5xl text-white">
+            {formatNumberWithCommas(totalState)}
+          </h1>
         </div>
         <div>
-          {/* <img
-            src="/image/shape.png"
-            alt=""
-            className="absolute z-10 left-0 top-[-50px]"
-          /> */}
           <div
-            className={`relative bg-[url('/image/Bitmap3.png')] mb-7 rounded-full bg-cover z-50 w-[400px] h-[400px] max-sm:w-[280px] max-sm:h-[280px] z-10 ${
+            className={`relative bg-[url('/image/Bitmap3.png')] mb-7 rounded-full bg-cover z-50 w-[400px] h-[400px] max-sm:w-[280px] max-sm:h-[280px] ${
               remainedEnergy > 0
                 ? "cursor-pointer"
                 : "cursor-not-allowed opacity-50"
@@ -172,7 +174,7 @@ function Home() {
         </div>
         <div className="flex flex-row justify-between w-full px-8 max-sm:px-4 mt-4">
           <div className="flex justify-between w-full">
-            <h3 className="flex justify-center items-center text-2xl mb-2 text-white flex flex-row">
+            <h3 className="flex justify-center items-center text-2xl mb-2 text-white flex-row">
               <span className="text-3xl ">
                 <img
                   src="/image/icon/lightning.svg"

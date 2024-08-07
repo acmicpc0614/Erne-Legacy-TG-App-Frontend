@@ -1,10 +1,22 @@
 // third-party
-import { configureStore } from '@reduxjs/toolkit';
-import { useDispatch as useAppDispatch, useSelector as useAppSelector, TypedUseSelectorHook } from 'react-redux';
-import { persistStore, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
+import { configureStore } from "@reduxjs/toolkit";
+import {
+  useDispatch as useAppDispatch,
+  useSelector as useAppSelector,
+  TypedUseSelectorHook,
+} from "react-redux";
+import {
+  persistStore,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
 
 // project import
-import reducers from './reducers';
+import reducers from "./reducers";
 
 // ==============================|| REDUX TOOLKIT - MAIN STORE ||============================== //
 
@@ -13,9 +25,9 @@ const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
-      }
-    })
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 });
 
 export type RootState = ReturnType<typeof reducers>;
@@ -30,3 +42,18 @@ const useDispatch = () => useAppDispatch<AppDispatch>();
 const useSelector: TypedUseSelectorHook<RootState> = useAppSelector;
 
 export { store, dispatch, persister, useSelector, useDispatch };
+
+// item list
+const FILLENEGY = "FILLENEGY";
+const LIMITINCREASE = "LIMITINCREASE";
+const TAPMULTI = "TAPMULTI";
+const TAPINCREASE = "TAPINCREASE";
+
+export { FILLENEGY, LIMITINCREASE, TAPINCREASE, TAPMULTI };
+
+// image import
+import ImgDollar from "./../../public/image/bitcoin.png";
+import ImgDoubleTap from "./../../public/image/double-tap.png";
+import ImgButtery from "./../../public/image/battery.png";
+
+export { ImgDollar, ImgDoubleTap, ImgButtery };

@@ -16,12 +16,14 @@ const initialState: walletStateProps = {
   user: {
     _id: "",
     username: "",
+    totalPoint: 0,
     balance: 0,
     energy: 0,
     tap: 1,
     limit: 1000,
+    level: 1,
   },
-  friend : false,
+  friend: false,
   users: [],
 };
 
@@ -38,8 +40,8 @@ const wallet = createSlice({
     getWalletSuccess(state, action) {
       state.user = action.payload;
     },
-    getUsersSuccess (state, action) {
-      state.users = action.payload
+    getUsersSuccess(state, action) {
+      state.users = action.payload;
     },
     addWalletSuccess(state, action) {
       state.user = action.payload;
@@ -82,12 +84,14 @@ export function insertWallet(username: string) {
 }
 export function updateWallet(
   username: string,
+  totalPoint: number,
   balance: number,
   energy: number
 ) {
   return async () => {
     try {
       const response = await axios.post(`/wallet/update/${username}`, {
+        totalPoint: totalPoint,
         balance: balance,
         energy: energy,
       });
