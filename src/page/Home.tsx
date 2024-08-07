@@ -15,6 +15,8 @@ import {
   getWallet,
 } from "../store/reducers/wallet";
 function Home() {
+  const PassItemCount = [0, 1, 2, 3, 4, 5];
+
   const audio = new Audio(soundEffect);
   const usernameState = useSelector((state) => state.wallet.user?.username);
   const tokenState = useSelector((state) => state.wallet.user?.balance);
@@ -61,34 +63,39 @@ function Home() {
     //     setRemainedEnergy(energyState);
     //   });
     // }
-    const miningInterval = setInterval(() => {
-      // 1723033669157
-      //       6501001
-      // 1723027200
-      setToken((prevToken) => {
-        const tmp = prevToken + getBounsFromPassItem(passItemLevel, lastTime);
-        return tmp;
-      });
+    if (passItemLevel > 0) {
+      const miningInterval = setInterval(() => {
+        // 1723033669157
+        //       6501001
+        // 1723027200 getBounsFromPassItem(passItemLevel, lastTime)
+        setToken((prevToken) => {
+          const tmp = prevToken + PassItemCount[passItemLevel];
+          return tmp;
+        });
 
-      setTotal((prevTotal) => {
-        const tmp = prevTotal + getBounsFromPassItem(passItemLevel, lastTime);
-        return tmp;
-      });
-    }, 10000); // Mine every second
-    return () => {
-      clearInterval(miningInterval);
-    };
+        setTotal((prevTotal) => {
+          const tmp = prevTotal + PassItemCount[passItemLevel];
+          return tmp;
+        });
+      }, 1000); // Mine every second
+      return () => {
+        clearInterval(miningInterval);
+      };
+    }
   }, []);
-  // console.log("---Telegram info----->", username);
+
   useEffect(() => {
     setLimit(limitState);
   }, [limitState]);
+
   useEffect(() => {
     dispatch(insertWallet(username));
   }, [username]);
+
   function formatNumberWithCommas(number: number, locale = "en-US") {
     return new Intl.NumberFormat(locale).format(number);
   }
+
   const bodyRef = useRef<HTMLDivElement>(null);
   const [score, setScore] = useState<string>(`+${tap}`);
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -131,6 +138,7 @@ function Home() {
 
     return () => clearTimeout(interval);
   };
+
   useEffect(() => {
     const interval = setInterval(() => {
       if (remainedEnergy < limit && remainedEnergy > 0) {
@@ -162,25 +170,15 @@ function Home() {
   const handleMouseDown = () => {
     setImgStatus(true);
   };
+
   const handleMouseLeave = () => {
     setImgStatus(false);
-  };
-
-  const PassItemCount = [0, 1, 2, 3, 4, 5];
-
-  const getBounsFromPassItem = (level: number, lastTime: number) => {
-    console.log("lastTime =>", lastTime);
-    console.log("curtTime =>", Date.now());
-    let deltaTime = Math.floor((Date.now() - lastTime) / 1000);
-    let tmp = PassItemCount[level] * deltaTime;
-    console.log("getBounsFromPassItem =>", deltaTime);
-    return tmp;
   };
 
   return (
     <div className="mt-8">
       <ToastContainer />
-      <CountDate date={3} />
+      <CountDate date={1} />
       <div className="relative mt-8 flex flex-col items-center w-full mb-9">
         <div className="flex flex-col justify-center items-center mb-7">
           <div className="flex justify-center items-center">
@@ -194,7 +192,7 @@ function Home() {
           </h1>
           <div className="flex flex-row gap-10">
             <h5 className="text-xl text-white">
-              GDP : {formatNumberWithCommas(totalState)}
+              GDP : {formatNumberWithCommas(total)}
             </h5>
 
             <h5 className="text-xl text-white">

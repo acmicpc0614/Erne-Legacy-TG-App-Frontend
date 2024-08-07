@@ -1,5 +1,5 @@
-import React from 'react';
-import "./modal.css"
+import React from "react";
+import "./modal.css";
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -11,7 +11,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
 
   return (
     <div className="modal">
-      <div className="modal-content">
+      <div className="modal-content min-w-[280px]">
         <span className="close-button" onClick={onClose}>
           &times;
         </span>

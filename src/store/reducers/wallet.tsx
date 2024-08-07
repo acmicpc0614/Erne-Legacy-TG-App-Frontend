@@ -66,9 +66,9 @@ export function getWallet(username: string) {
   return async () => {
     try {
       const response = await axios.post(`/wallet/${username}`);
-      dispatch(wallet.actions.getWalletSuccess(response?.data));
+      dispatch(wallet?.actions?.getWalletSuccess(response?.data));
     } catch (error) {
-      dispatch(wallet.actions.hasError(error));
+      dispatch(wallet?.actions?.hasError(error));
     }
   };
 }
@@ -97,9 +97,9 @@ export function updateWallet(
         balance: balance,
         energy: energy,
       });
-      dispatch(wallet.actions.updateWalletSuccess(response?.data));
+      dispatch(wallet?.actions?.updateWalletSuccess(response?.data));
     } catch (error) {
-      dispatch(wallet.actions.hasError(error));
+      dispatch(wallet?.actions?.hasError(error));
     }
   };
 }
@@ -110,9 +110,9 @@ export function updateEnergy(username: string, energy: number) {
       const response = await axios.post(`/wallet/updateEnergy/${username}`, {
         energy: energy,
       });
-      dispatch(wallet?.actions.updateWalletSuccess(response?.data));
+      dispatch(wallet?.actions?.updateWalletSuccess(response?.data));
     } catch (error) {
-      dispatch(wallet?.actions.hasError(error));
+      dispatch(wallet?.actions?.hasError(error));
     }
   };
 }
@@ -123,23 +123,24 @@ export function updateTap(username: string, tap: number) {
       const response = await axios.post(`/wallet/updateTap/${username}`, {
         tap: tap,
       });
-      dispatch(wallet?.actions.updateWalletSuccess(response.data));
+      dispatch(wallet?.actions?.updateWalletSuccess(response.data));
     } catch (error) {
-      dispatch(wallet?.actions.hasError(error));
+      dispatch(wallet?.actions?.hasError(error));
     }
   };
 }
 
-export function buyBonusCard(username: string) {
+export function buyBonusCard(username: string, token: number) {
   console.log("buyBonusCard =>");
   return async () => {
     try {
       const response = await axios.post(`/wallet/buyBonusCard/${username}`, {
         passItemLevel: 1, // tap: tap,
+        token: token,
       });
-      dispatch(wallet.actions.updateWalletSuccess(response?.data));
+      dispatch(wallet?.actions?.updateWalletSuccess(response?.data));
     } catch (error) {
-      dispatch(wallet.actions.hasError(error));
+      dispatch(wallet?.actions?.hasError(error));
     }
   };
 }
@@ -151,9 +152,9 @@ export function updateLimit(username: string, limit: number) {
       const response = await axios.post(`/wallet/updateLimit/${username}`, {
         limit: limit,
       });
-      dispatch(wallet.actions.updateWalletSuccess(response.data));
+      dispatch(wallet?.actions?.updateWalletSuccess(response.data));
     } catch (error) {
-      dispatch(wallet.actions.hasError(error));
+      dispatch(wallet?.actions?.hasError(error));
     }
   };
 }
@@ -163,9 +164,9 @@ export function updateBalance(username: string, balance: number) {
       const response = await axios.post(`/wallet/updateBalance/${username}`, {
         balance: balance,
       });
-      dispatch(wallet.actions.updateWalletSuccess(response.data));
+      dispatch(wallet?.actions?.updateWalletSuccess(response.data));
     } catch (error) {
-      dispatch(wallet.actions.hasError(error));
+      dispatch(wallet?.actions?.hasError(error));
     }
   };
 }
@@ -173,9 +174,9 @@ export function addFriend(username: string) {
   return async () => {
     try {
       await axios.post(`/wallet/${username}`);
-      dispatch(wallet.actions.addFriendSuccess(true));
+      dispatch(wallet?.actions?.addFriendSuccess(true));
     } catch (error) {
-      dispatch(wallet.actions.addFriendSuccess(false));
+      dispatch(wallet?.actions?.addFriendSuccess(false));
     }
   };
 }
@@ -184,9 +185,9 @@ export function getAllUsers() {
   return async () => {
     try {
       const response = await axios.get("/wallet/all");
-      dispatch(wallet.actions.getUsersSuccess(response?.data));
+      dispatch(wallet?.actions?.getUsersSuccess(response?.data));
     } catch (error) {
-      dispatch(wallet.actions.hasError(error));
+      dispatch(wallet?.actions?.hasError(error));
     }
   };
 }

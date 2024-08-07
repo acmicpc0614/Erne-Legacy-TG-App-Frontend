@@ -47,7 +47,13 @@ export default function Boost() {
   //   toast.success("Successfully updated limit!");
   // };
   const handleBonusClick = () => {
-    dispatch(buyBonusCard(username ? username : "telegram"));
+    if (token < 1000) {
+      toast.error(
+        "There isn't enough tokens. You need 1000 tokens to purchase a card. Please check your"
+      );
+      return;
+    }
+    dispatch(buyBonusCard(username ? username : "telegram", token - 1000));
     setIsBonusModalOpen(false);
     toast.success("Successfully purchase card.");
   };

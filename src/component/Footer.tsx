@@ -9,7 +9,7 @@ export default function Footer() {
     setPath(location.pathname);
   }, [location]);
   return (
-    <div className="flex flex-row gap-10 justify-around items-center bottom-[2px] mb-5 w-full h-[70px] pt-[10px]">
+    <div className="flex flex-row gap-10 justify-around items-center bottom-[2px] mb-5 w-full h-[70px] pt-[10px] px-5">
       <Link
         to="/ranking"
         className={`flex flex-col items-center justify-center cursor-pointer transform origin-bottom transition ${
@@ -18,8 +18,8 @@ export default function Footer() {
             : "opacity-50 text-white"
         }`}
       >
-        <img src="/image/ranking.png" alt="ranking" className="w-12 h-12" />
-        <p className="text-sm max-sm:text-sm text-white">RANKING</p>
+        <img src="/image/ranking.png" alt="ranking" className="w-8 h-8" />
+        <p className="text-sm max-sm:text-sm text-white">Rank</p>
       </Link>
       <Link
         to=""
@@ -27,7 +27,7 @@ export default function Footer() {
           path === "/" ? "scale-[110%] opacity-100" : "opacity-50 text-white"
         }`}
       >
-        <img src="/image/mining.png" alt="play" className="w-12 h-12" />
+        <img src="/image/mining.png" alt="play" className="w-8 h-8" />
         <p className="text-sm max-sm:text-sm text-white">Mint</p>
       </Link>
       <Link
@@ -38,7 +38,7 @@ export default function Footer() {
             : "opacity-50 text-white"
         }`}
       >
-        <img src="/image/add-friend.png" alt="quest" className="w-12 h-12" />
+        <img src="/image/add-friend.png" alt="quest" className="w-8 h-8" />
         <p className="text-sm max-sm:text-sm text-white">Friends</p>
       </Link>
       <Link
@@ -49,8 +49,8 @@ export default function Footer() {
             : "opacity-50 text-white"
         }`}
       >
-        <img src="/image/earnings.png" alt="ranking" className="w-12 h-12" />
-        <p className="text-sm max-sm:text-sm text-white">TASK</p>
+        <img src="/image/earnings.png" alt="ranking" className="w-8 h-8" />
+        <p className="text-sm max-sm:text-sm text-white">Task</p>
       </Link>
     </div>
   );

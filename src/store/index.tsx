@@ -57,3 +57,26 @@ import ImgDoubleTap from "./../../public/image/double-tap.png";
 import ImgButtery from "./../../public/image/battery.png";
 
 export { ImgDollar, ImgDoubleTap, ImgButtery };
+
+export function formatNumberWithCommas(number: number, locale = "en-US") {
+  let tmp = "";
+  let tmpNumber = number;
+  if (tmpNumber >= 1000000000000000) {
+    tmpNumber = Math.floor(tmpNumber / 1000000000000) / 1000;
+    tmp = "P";
+  } else if (tmpNumber >= 1000000000000) {
+    tmpNumber = Math.floor(tmpNumber / 1000000000) / 1000;
+    tmp = "T";
+  } else if (tmpNumber >= 1000000000) {
+    tmpNumber = Math.floor(tmpNumber / 1000000) / 1000;
+    tmp = "G";
+  } else if (tmpNumber >= 1000000) {
+    tmpNumber = Math.floor(tmpNumber / 1000) / 1000;
+    tmp = "M";
+  } else if (tmpNumber >= 1000) {
+    tmpNumber = tmpNumber / 1000;
+    tmp = "K";
+  }
+
+  return new Intl.NumberFormat(locale).format(tmpNumber) + " " + tmp;
+}
