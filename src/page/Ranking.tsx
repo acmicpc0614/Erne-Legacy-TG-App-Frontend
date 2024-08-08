@@ -11,11 +11,10 @@ export default function Ranking() {
   //   });
   // }, [users_state]);
   useEffect(() => {
-    console.log("getallusers calling...");
+    // console.log("getallusers calling...");
     dispatch(getAllUsers()).then(() => {
       setUsers(usersa);
     });
-    console.log(usersa.length);
   }, []);
 
   const findUserRank = (username: string) => {
