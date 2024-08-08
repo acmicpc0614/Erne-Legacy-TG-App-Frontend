@@ -64,17 +64,21 @@ export default function Task() {
   };
 
   const handleGetDailyEarning = async () => {
-    setUsername("telegram");
+    // setUsername("telegram");
     try {
-      // await axios.post(`/wallet/getDailyEarn/${username}`).then((res) => {
-      await axios.post(`/wallet/getDailyEarn/telegram`).then((res) => {
-        if (res.status === 200)
-          toast.success("You have received +1000 daily Earning successfully!");
-        else
-          toast.info(
-            "You earned already today's daily earnings! Please try tomorrow."
-          );
-      });
+      await axios
+        .post(`/wallet/getDailyEarn/${username ? username : "telegram"}`)
+        .then((res) => {
+          // await axios.post(`/wallet/getDailyEarn/telegram`).then((res) => {
+          if (res.status === 200)
+            toast.success(
+              "You have received +1000 daily Earning successfully!"
+            );
+          else
+            toast.info(
+              "You earned already today's daily earnings! Please try tomorrow."
+            );
+        });
     } catch (error) {
       console.log(error);
       toast.warning("Unknown error occurred. Please try again later.");
@@ -88,9 +92,9 @@ export default function Task() {
         <h2 className=" text-xl">Earn more coins</h2>
       </div>
 
-      <div className="flex flex-col justify-center p-7">
+      <div className="flex flex-col justify-center p-7 gap-4">
         <div
-          className="flex items-center h-24 max-sm:h-24 justify-between px-3 py-2 my-4 bg-[#363636] hover:bg-zinc-500 rounded-[20px]"
+          className="flex px-3 py-4 items-center bg-[#363636] hover:bg-[#5f5f5f]  border-l-[#4aff86] border-l-[6px] border-transparent rounded-2xl gap-2"
           onClick={handleGetDailyEarning}
         >
           <div className="flex justify-start items-center">
@@ -104,11 +108,14 @@ export default function Task() {
                 <span className=" text-amber-400">+1000</span>
               </div>
             </div>
+            <div className="flex absolute right-12">
+              <span className="text-sm font-bold">1:45:21</span>
+            </div>
           </div>
         </div>
 
         <div
-          className="flex items-center h-24 max-sm:h-24 justify-between px-3 py-2 my-4 bg-[#363636] hover:bg-zinc-500 rounded-[20px]"
+          className="flex px-3 py-4 items-center bg-[#363636] hover:bg-[#5f5f5f]  border-l-[#4aff86] border-l-[6px] border-transparent rounded-2xl gap-2"
           onClick={handleJoinTelegramGroup}
         >
           <div className="flex justify-start items-center">
@@ -125,7 +132,7 @@ export default function Task() {
           </div>
         </div>
         <div
-          className="flex items-center h-24 max-sm:h-24 justify-between px-3 py-2 my-4 bg-[#363636] hover:bg-zinc-500 rounded-[20px]"
+          className="flex px-3 py-4 items-center bg-[#363636] hover:bg-[#5f5f5f]  border-l-[#4aff86] border-l-[6px] border-transparent rounded-2xl gap-2"
           onClick={handleSubscribeTelegramChannel}
         >
           <div className="flex justify-start items-center">
@@ -141,7 +148,7 @@ export default function Task() {
             </div>
           </div>
         </div>
-        {/* <div className="flex items-center h-24 max-sm:h-24 justify-between px-3 py-2 my-4 bg-[#363636] hover:bg-zinc-500 rounded-[20px]">
+        {/* <div className="flex px-3 py-4 items-center bg-[#363636] hover:bg-[#5f5f5f]  border-l-[#4aff86] border-l-[6px] border-transparent rounded-2xl gap-2">
           <div className="flex justify-start items-center">
             <img src="image/twitter.png" alt="" className=" w-14 h-14" />
             <div className=" flex flex-col justify-start">
