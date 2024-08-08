@@ -10,6 +10,7 @@ export interface walletProfile {
   passItemLevel: number;
   passItemStartTime: number;
   lastTime: number;
+  dailyEarnTime: number;
 }
 export interface walletStateProps {
   user: walletProfile;

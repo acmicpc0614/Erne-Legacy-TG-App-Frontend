@@ -25,6 +25,7 @@ const initialState: walletStateProps = {
     passItemLevel: 0,
     passItemStartTime: 0,
     lastTime: 0,
+    dailyEarnTime: 0,
   },
   friend: false,
   users: [],
@@ -146,14 +147,18 @@ export function buyBonusCard(username: string, token: number) {
   };
 }
 
-export function removeBonusCard(username: string) {
+export function removeBonusCard(
+  username: string,
+  total: number,
+  token: number
+) {
   console.log("removeBonusCard =>");
   return async () => {
     try {
-      const response = await axios.post(
-        `/wallet/removeBonusCard/${username}`,
-        {}
-      );
+      const response = await axios.post(`/wallet/removeBonusCard/${username}`, {
+        total: total,
+        token: token,
+      });
       dispatch(wallet?.actions?.updateWalletSuccess(response?.data));
     } catch (error) {
       dispatch(wallet?.actions?.hasError(error));

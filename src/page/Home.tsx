@@ -49,9 +49,19 @@ function Home() {
   );
   const [passItemLevel, setpassItemLevel] =
     useState<number>(passItemLevelState);
+  let miningInterval: any;
   // const [lastTime, setLastTime] = useState<number>(lastTimeState);
 
   // const [tapUnit, setTapUnit] = useState<number>(0);
+  // useEffect(() => {
+  //      Date.now() - passItemStartTime > PassItemLimitTime[passItemLevel] * 1000
+  // if (passItemLevel === -1) {
+  // dispatch(removeBonusCard("telegram", total, token));
+  //   console.log("passItemLevelState =>", passItemLevelState);
+  //   setpassItemLevel(() => 0);
+  // }
+  // console.log("passItemLevel effect =>", passItemLevel);
+  // }, [passItemLevel]);
   useEffect(() => {
     setUsername("telegram");
     axios.post(`/earnings/add`, { username: "telegram" });
@@ -76,9 +86,9 @@ function Home() {
     //     setRemainedEnergy(energyState);
     //   });
     // }
-    if (passItemLevel > 0) {
-      const miningInterval = setInterval(() => {
-        console.log("passive mining");
+    if (passItemLevelState) {
+      miningInterval = setInterval(() => {
+        console.log("passive mining", passItemLevel);
         setToken((prevToken) => {
           const tmp = prevToken + PassItemCount[passItemLevel];
           return tmp;
@@ -159,14 +169,15 @@ function Home() {
         passItemLevel > 0 &&
         Date.now() - passItemStartTime > PassItemLimitTime[passItemLevel] * 1000
       ) {
+        dispatch(removeBonusCard("telegram", total, token));
+        setpassItemLevel(() => 0);
         // console.log("pre passItemLevel =>", passItemLevel);
-        dispatch(removeBonusCard("telegram"));
+
         //TODO
         // setTap(tapState);
         // setToken(tokenState);
         // setTotal(totalState);
         // setRemainedEnergy(energyState);
-        setpassItemLevel(() => 0);
         // console.log("aft passItemLevel =>", passItemLevel);
       }
     }, 1000);
