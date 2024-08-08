@@ -11,7 +11,7 @@ export default function Task() {
   const [balance, setBalance] = useState<number>(balance_state);
 
   const DAY = 86400 * 1000;
-  const TESTMINUTE = 20 * 1000; // 10s
+  // const TESTMINUTE = 20 * 1000; // 10s
   // const targetDate = Date.now() - (Date.now() % TESTMINUTE) + TESTMINUTE;
   const [targetDate, setTargetData] = useState<number>(
     Date.now() - (Date.now() % DAY) + DAY
