@@ -30,7 +30,7 @@ export default function Ranking() {
 
   return (
     <div className="Ranking max-w-full mx-auto text-white mb-16 !h-full">
-      <div className="flex  w-full items-ceter gap-2 justify-start sticky top-0 z-10 bg-black opacity-75 pt-8">
+      <div className="flex  w-full items-ceter gap-2 justify-start z-10  opacity-75 pt-8">
         <div className="text-xl text-start w-[20%] font-sans text-[#8a8888] font-bold flex justify-center items-center">
           {findUserRank("telegram")}th
         </div>
@@ -56,7 +56,7 @@ export default function Ranking() {
         </div>
       </div>
 
-      <div className="flex px-3 py-1 text-white text-lg font-bold justify-start align-middle overflow-y-hidden sticky top-[72px] z-10 opacity-75 shadow-lg shadow-white mb-3">
+      <div className="flex px-3 py-1 text-white text-lg font-bold justify-start align-middle overflow-y-hidden mb-3">
         <div className="text-start w-[20%] flex justify-center text-sm">
           Rank
         </div>
