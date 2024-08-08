@@ -183,7 +183,7 @@ function Home() {
       if (remainedEnergy < limit && remainedEnergy > 0) {
         // dispatch(updateEnergy(username, remainedEnergy + 1));
       }
-      // ItemAvailableCheck();
+      if (total < 0) ItemAvailableCheck();
     }, 1000);
     return () => clearInterval(interval);
     // const interval = setTimeout(() => {
