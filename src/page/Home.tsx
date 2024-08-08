@@ -56,29 +56,29 @@ function Home() {
   // const [tapUnit, setTapUnit] = useState<number>(0);
 
   useEffect(() => {
-    setUsername("telegram");
-    axios.post(`/earnings/add`, { username: "telegram" });
-    dispatch(insertWallet("telegram"));
-    dispatch(getWallet("telegram")).then(() => {
-      setTap(tapState);
-      setToken(tokenState);
-      setTotal(totalState);
-      setRemainedEnergy(energyState);
-      setpassItemStartTime(passItemStartTimeState);
-    });
+    // setUsername("telegram");
+    // axios.post(`/earnings/add`, { username: "telegram" });
+    // dispatch(insertWallet("telegram"));
+    // dispatch(getWallet("telegram")).then(() => {
+    //   setTap(tapState);
+    //   setToken(tokenState);
+    //   setTotal(totalState);
+    //   setRemainedEnergy(energyState);
+    //   setpassItemStartTime(passItemStartTimeState);
+    // });
 
-    // const webapp = (window as any).Telegram?.WebApp.initDataUnsafe;
-    // console.log("=========>webapp", webapp);
-    // if (webapp) {
-    //   setUsername(webapp["user"]["username"]);
-    //   axios.post(`/earnings/add`, { username: webapp["user"]["username"] });
-    //   dispatch(insertWallet(webapp["user"]["username"]));
-    //   dispatch(getWallet(webapp["user"]["username"])).then(() => {
-    //     setTap(tapState);
-    //     setToken(tokenState);
-    //     setRemainedEnergy(energyState);
-    //   });
-    // }
+    const webapp = (window as any).Telegram?.WebApp.initDataUnsafe;
+    console.log("=========>webapp", webapp);
+    if (webapp) {
+      setUsername(webapp["user"]["username"]);
+      axios.post(`/earnings/add`, { username: webapp["user"]["username"] });
+      dispatch(insertWallet(webapp["user"]["username"]));
+      dispatch(getWallet(webapp["user"]["username"])).then(() => {
+        setTap(tapState);
+        setToken(tokenState);
+        setRemainedEnergy(energyState);
+      });
+    }
 
     if (passItemLevelState) {
       miningInterval = setInterval(() => {

@@ -15,7 +15,7 @@ export default function Ranking() {
       try {
         await dispatch(getAllUsers());
         // console.log("users_state =>", users_state);
-        setUsers((prev) => users_state);
+        setUsers(() => users_state);
         // console.log("users =>", usersa);
       } catch (error) {
         console.error("Error fetching users:", error);
