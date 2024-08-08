@@ -8,6 +8,7 @@ export interface walletProfile {
   limit: number;
   level: number;
   passItemLevel: number;
+  passItemStartTime: number;
   lastTime: number;
 }
 export interface walletStateProps {

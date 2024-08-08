@@ -159,6 +159,21 @@ export default function Boost() {
             </div>
           </div>
         </div>
+
+        <div
+          className={`flex my-3 px-5 py-3 items-center bg-[#4d4d4c] rounded-[30px] gap-2 hover:bg-[#3a3a3a]`}
+        >
+          <img src="/image/double-tap.png" alt="" className="w-10 h-10" />
+          <div className="flex flex-col gap-1">
+            <h3 className="text-2xl text-white text-left">
+              Upgrade Earning per Tap
+            </h3>
+            <div className="flex gap-3 align-middle">
+              <img src="/image/dollar.png" alt="" className="w-5 h-5" />
+              <h3>2k nessessary</h3>
+            </div>
+          </div>
+        </div>
       </div>
       <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
         <div className="flex flex-col items-center align-middle gap-3">

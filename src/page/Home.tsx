@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, redirect } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // import CountDate from "../component/CountDate";
@@ -13,11 +13,13 @@ import {
   updateWallet,
   // updateEnergy,
   getWallet,
+  removeBonusCard,
 } from "../store/reducers/wallet";
 import ScoreBoard from "../component/ScoreBoard";
 
 function Home() {
   const PassItemCount = [0, 1, 2, 3, 4, 5];
+  const PassItemLimitTime = [0, 10, 3600, 3600, 3600, 3600];
 
   const audio = new Audio(soundEffect);
   const usernameState = useSelector((state) => state.wallet.user?.username);
@@ -26,11 +28,14 @@ function Home() {
   const tapState = useSelector((state) => state.wallet.user?.tap);
   const limitState = useSelector((state) => state.wallet.user?.limit);
   const totalState = useSelector((state) => state.wallet.user?.totalPoint);
-  const levelState = useSelector((state) => state.wallet.user?.level);
-  const passItemLevel = useSelector(
+  // const levelState = useSelector((state) => state.wallet.user?.level);
+  const passItemLevelState = useSelector(
     (state) => state.wallet.user?.passItemLevel
   );
-  const lastTimeState = useSelector((state) => state.wallet.user?.lastTime);
+  const passItemStartTimeState = useSelector(
+    (state) => state.wallet.user?.passItemStartTime
+  );
+  // const lastTimeState = useSelector((state) => state.wallet.user?.lastTime);
 
   const [imgStatus, setImgStatus] = useState(false);
   const [tap, setTap] = useState<number>(tapState);
@@ -39,6 +44,11 @@ function Home() {
   const [remainedEnergy, setRemainedEnergy] = useState<number>(energyState);
   const [limit, setLimit] = useState<number>(limitState);
   const [total, setTotal] = useState<number>(totalState);
+  const [passItemStartTime, setpassItemStartTime] = useState<number>(
+    passItemStartTimeState
+  );
+  const [passItemLevel, setpassItemLevel] =
+    useState<number>(passItemLevelState);
   // const [lastTime, setLastTime] = useState<number>(lastTimeState);
 
   // const [tapUnit, setTapUnit] = useState<number>(0);
@@ -51,6 +61,7 @@ function Home() {
       setToken(tokenState);
       setTotal(totalState);
       setRemainedEnergy(energyState);
+      setpassItemStartTime(passItemStartTimeState);
     });
     // const webapp = (window as any).Telegram?.WebApp.initDataUnsafe;
     // console.log("=========>webapp", webapp);
@@ -67,6 +78,7 @@ function Home() {
     // }
     if (passItemLevel > 0) {
       const miningInterval = setInterval(() => {
+        console.log("passive mining");
         setToken((prevToken) => {
           const tmp = prevToken + PassItemCount[passItemLevel];
           return tmp;
@@ -143,6 +155,20 @@ function Home() {
       if (remainedEnergy < limit && remainedEnergy > 0) {
         // dispatch(updateEnergy(username, remainedEnergy + 1));
       }
+      if (
+        passItemLevel > 0 &&
+        Date.now() - passItemStartTime > PassItemLimitTime[passItemLevel] * 1000
+      ) {
+        // console.log("pre passItemLevel =>", passItemLevel);
+        dispatch(removeBonusCard("telegram"));
+        //TODO
+        // setTap(tapState);
+        // setToken(tokenState);
+        // setTotal(totalState);
+        // setRemainedEnergy(energyState);
+        // setpassItemLevel(() => 0);
+        // console.log("aft passItemLevel =>", passItemLevel);
+      }
     }, 1000);
     return () => clearInterval(interval);
     // const interval = setTimeout(() => {
@@ -177,7 +203,11 @@ function Home() {
   return (
     <div className="mt-8">
       <ToastContainer />
-      <ScoreBoard tapUnit={1} gdp={total} />
+      <ScoreBoard
+        tapUnit={1}
+        gdp={total}
+        passive={PassItemCount[passItemLevel]}
+      />
       {/* <CountDate date={1} />   */}
       <div className="relative mt-8 flex flex-col items-center w-full mb-9">
         <div className="flex flex-col justify-center items-center mb-7">
@@ -189,7 +219,7 @@ function Home() {
           </div> */}
           <div className="flex flex-row gap-3 items-center">
             <img src="/image/money-bag.png" alt="" className="w-10 h-10" />
-            <h1 className="text-5xl text-white">
+            <h1 className="text-2xl font-bold">
               {formatNumberWithCommas(token)}
             </h1>
           </div>
@@ -226,8 +256,9 @@ function Home() {
                   className="w-6 h-6 inline"
                 />
               </span>
-              <span className="text-xl text-white">{remainedEnergy}</span> /{" "}
-              {limit}
+              <span className="text-sm font-sans font-bold">
+                {remainedEnergy} / {limit}
+              </span>
             </h3>
             <div className="flex justify-center items-center">
               <Link to="/boost" className="flex">

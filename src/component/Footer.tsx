@@ -28,7 +28,7 @@ export default function Footer() {
         }`}
       >
         <img src="/image/mining.png" alt="play" className="w-8 h-8" />
-        <p className="text-sm max-sm:text-sm text-white">Mint</p>
+        <p className="text-sm max-sm:text-sm text-white">Mine</p>
       </Link>
       <Link
         to="/quest"
@@ -50,7 +50,7 @@ export default function Footer() {
         }`}
       >
         <img src="/image/earnings.png" alt="ranking" className="w-8 h-8" />
-        <p className="text-sm max-sm:text-sm text-white">Task</p>
+        <p className="text-sm max-sm:text-sm text-white">Earn</p>
       </Link>
     </div>
   );
