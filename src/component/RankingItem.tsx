@@ -4,6 +4,7 @@ import Modal from "./modal";
 
 const RankingItem = (index: any, data: any) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  console.log(data);
   const handleClick = () => {
     setIsModalOpen(true);
   };

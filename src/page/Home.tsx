@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState, useRef } from "react";
-import { Link, redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // import CountDate from "../component/CountDate";
@@ -166,7 +166,7 @@ function Home() {
         // setToken(tokenState);
         // setTotal(totalState);
         // setRemainedEnergy(energyState);
-        // setpassItemLevel(() => 0);
+        setpassItemLevel(() => 0);
         // console.log("aft passItemLevel =>", passItemLevel);
       }
     }, 1000);

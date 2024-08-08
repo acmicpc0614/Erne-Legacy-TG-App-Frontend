@@ -3,8 +3,8 @@ import { toast, ToastContainer } from "react-toastify";
 import {
   buyBonusCard,
   updateEnergy,
-  updateLimit,
-  updateTap,
+  // updateLimit,
+  // updateTap,
 } from "../store/reducers/wallet";
 import { useEffect, useState } from "react";
 import Modal from "../component/modal";
@@ -20,6 +20,7 @@ export default function Boost() {
   const [tap, setTap] = useState<number>(tap_state);
 
   useEffect(() => {
+    console.log(tap);
     setToken(tokenState);
     setUsername(username_state);
     setLimit(limit_state);
