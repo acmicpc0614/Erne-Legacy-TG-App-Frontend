@@ -7,7 +7,7 @@ import Ranking from "./page/Ranking";
 import Quest from "./page/Quest";
 import { ToastContainer } from "react-toastify";
 import Footer from "./component/Footer";
-import Layout from "./Layout";
+// import Layout from "./Layout";
 import Loading from "./component/Loading";
 import { Provider as ReduxProvider } from "react-redux";
 import { store } from "./store";
@@ -29,17 +29,17 @@ function App() {
       {loading ? (
         <Loading />
       ) : (
-        <div className="App w-[750px] flex flex-col justify-between relative">
+        <div className="App w-[750px] flex flex-col relative">
           <ReduxProvider store={store}>
-            <div className="overflow-y-auto">
+            <div className="overflow-y-auto h-full">
               <Routes>
-                <Route path="/" element={<Layout />}>
-                  <Route index element={<Home />} />
-                  <Route path="ranking" element={<Ranking />} />
-                  <Route path="quest" element={<Quest />} />
-                  <Route path="boost" element={<Boost />} />
-                  <Route path="task" element={<Task />} />
-                </Route>
+                {/* <Route path="/" element={<Layout />}> */}
+                <Route index element={<Home />} />
+                <Route path="ranking" element={<Ranking />} />
+                <Route path="quest" element={<Quest />} />
+                <Route path="boost" element={<Boost />} />
+                <Route path="task" element={<Task />} />
+                {/* </Route> */}
               </Routes>
             </div>
             <ToastContainer />
