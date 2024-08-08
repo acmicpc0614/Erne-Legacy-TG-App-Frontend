@@ -28,34 +28,36 @@ export default function Ranking() {
   };
 
   return (
-    <div className="Ranking max-w-full mx-auto text-white mb-16 !h-full">
-      <div className="flex  w-full items-ceter gap-2 justify-start z-10  opacity-75 pt-8">
-        <div className="text-xl text-start w-[20%] font-sans text-[#8a8888] font-bold flex justify-center items-center">
-          {findUserRank("telegram")}th
-        </div>
-        <div className="relative overflow-hidden h-10 w-[30%] flex items-center justify-start gap-2 ">
+    <div className="Ranking max-w-full mx-auto text-white !h-full">
+      <div className="flex flex-col w-full items-ceter gap-2 justify-start z-10 px-3 pt-2">
+        <div className="overflow-hidden h-10  flex items-center justify-start gap-2 ">
           <img
             src="/image/Bitmap3.png"
             alt="avatar"
             className="w-8 h-8 rounded-xl"
           />
-          <p className="text-md text-start font-sans overflow-hidden text-[#8a8888] font-bold">
+          <p className="text-xl text-start font-sans overflow-hidden text-[#eeeeee] font-bold">
             telegram
           </p>
         </div>
-        <div className="flex items-center gap-1">
-          <img
-            src="/image/dollar.png"
-            alt="avatar"
-            className="w-6 h-6 rounded-xl"
-          />
-          <p className="text-xl text-end pr-4 w-[50%] font-sans text-[#8a8888] font-bold">
-            {findUserGDP("telegram")}
-          </p>
+        <div className="flex">
+          <div className="text-xl text-start w-[20%] font-sans text-[#8a8888] font-bold flex items-center">
+            {findUserRank("telegram")}th
+          </div>
+          <div className="flex items-center gap-1">
+            <img
+              src="/image/dollar.png"
+              alt="avatar"
+              className="w-6 h-6 rounded-xl"
+            />
+            <p className="text-xl text-end pr-4 w-[50%] font-sans text-[#8a8888] font-bold">
+              {findUserGDP("telegram")}
+            </p>
+          </div>
         </div>
       </div>
 
-      <div className="flex px-3 py-1 text-white text-lg font-bold justify-start align-middle overflow-y-hidden mb-3">
+      <div className="flex px-3 py-1 text-white text-lg font-bold justify-start align-middle overflow-y-hidden mb-1 border-b-blue-200 border-b-[1px] rounded-lg">
         <div className="text-start w-[20%] flex justify-center text-sm">
           Rank
         </div>
@@ -67,7 +69,7 @@ export default function Ranking() {
         </div>
       </div>
 
-      <RankingList usersa={usersa} />
+      <RankingList usersa={usersa} username={"telegram"} />
     </div>
   );
 }

@@ -105,7 +105,7 @@ export default function Task() {
 
       <div className="flex flex-col justify-center p-7 gap-4">
         <div
-          className="flex px-3 h-[100px] items-center bg-[#363636] hover:bg-[#5f5f5f]  border-l-[#4aff86] border-l-[6px] border-transparent rounded-2xl gap-2"
+          className="flex px-3 h-[75px] items-center bg-[#363636] hover:bg-[#5f5f5f]  border-l-[#4aff86] border-l-[6px] border-transparent rounded-2xl gap-2"
           onClick={handleGetDailyEarning}
         >
           <div className="flex justify-start items-center">
@@ -126,7 +126,7 @@ export default function Task() {
         </div>
 
         <div
-          className="flex px-3 h-[100px] items-center bg-[#363636] hover:bg-[#5f5f5f]  border-l-[#4aff86] border-l-[6px] border-transparent rounded-2xl gap-2"
+          className="flex px-3 h-[75px] items-center bg-[#363636] hover:bg-[#5f5f5f]  border-l-[#4aff86] border-l-[6px] border-transparent rounded-2xl gap-2"
           onClick={handleJoinTelegramGroup}
         >
           <div className="flex justify-start items-center">
@@ -143,7 +143,7 @@ export default function Task() {
           </div>
         </div>
         <div
-          className="flex px-3 h-[100px] items-center bg-[#363636] hover:bg-[#5f5f5f]  border-l-[#4aff86] border-l-[6px] border-transparent rounded-2xl gap-2"
+          className="flex px-3 h-[75px] items-center bg-[#363636] hover:bg-[#5f5f5f]  border-l-[#4aff86] border-l-[6px] border-transparent rounded-2xl gap-2"
           onClick={handleSubscribeTelegramChannel}
         >
           <div className="flex justify-start items-center">
@@ -159,7 +159,7 @@ export default function Task() {
             </div>
           </div>
         </div>
-        {/* <div className="flex px-3 h-[100px] items-center bg-[#363636] hover:bg-[#5f5f5f]  border-l-[#4aff86] border-l-[6px] border-transparent rounded-2xl gap-2">
+        {/* <div className="flex px-3 h-[75px] items-center bg-[#363636] hover:bg-[#5f5f5f]  border-l-[#4aff86] border-l-[6px] border-transparent rounded-2xl gap-2">
           <div className="flex justify-start items-center">
             <img src="image/twitter.png" alt="" className=" w-14 h-14" />
             <div className=" flex flex-col justify-start">

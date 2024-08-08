@@ -119,7 +119,7 @@ function Home() {
 
   const bodyRef = useRef<HTMLDivElement>(null);
   const [score, setScore] = useState<string>(`+${tap}`);
-  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+  const handleTapClick = (event: React.MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
     const rect = event.currentTarget.getBoundingClientRect();
     const x = Math.random() * (event.clientX - rect.left);
@@ -160,26 +160,30 @@ function Home() {
     return () => clearTimeout(interval);
   };
 
+  const ItemAvailableCheck = () => {
+    if (
+      passItemLevel > 0 &&
+      Date.now() - passItemStartTime > PassItemLimitTime[passItemLevel] * 1000
+    ) {
+      dispatch(removeBonusCard("telegram", total, token));
+      setpassItemLevel(() => 0);
+      // console.log("pre passItemLevel =>", passItemLevel);
+
+      //TODO
+      // setTap(tapState);
+      // setToken(tokenState);
+      // setTotal(totalState);
+      // setRemainedEnergy(energyState);
+      // console.log("aft passItemLevel =>", passItemLevel);
+    }
+  };
+
   useEffect(() => {
     const interval = setInterval(() => {
       if (remainedEnergy < limit && remainedEnergy > 0) {
         // dispatch(updateEnergy(username, remainedEnergy + 1));
       }
-      if (
-        passItemLevel > 0 &&
-        Date.now() - passItemStartTime > PassItemLimitTime[passItemLevel] * 1000
-      ) {
-        dispatch(removeBonusCard("telegram", total, token));
-        setpassItemLevel(() => 0);
-        // console.log("pre passItemLevel =>", passItemLevel);
-
-        //TODO
-        // setTap(tapState);
-        // setToken(tokenState);
-        // setTotal(totalState);
-        // setRemainedEnergy(energyState);
-        // console.log("aft passItemLevel =>", passItemLevel);
-      }
+      // ItemAvailableCheck();
     }, 1000);
     return () => clearInterval(interval);
     // const interval = setTimeout(() => {
@@ -199,7 +203,7 @@ function Home() {
         updateWallet(username, total + tap, token + tap, remainedEnergy - 1)
       );
       setRemainedEnergy(remainedEnergy - 1);
-      handleClick(event);
+      handleTapClick(event);
     }
   };
 
@@ -222,27 +226,12 @@ function Home() {
       {/* <CountDate date={1} />   */}
       <div className="relative mt-8 flex flex-col items-center w-full mb-9">
         <div className="flex flex-col justify-center items-center mb-7">
-          {/* <div className="flex justify-center items-center">
-            <img src="image/money-bag.png" alt="" className=" w-5 h-5" />
-            <h3 className="text-xl font-bold text-[#fff243]">
-              &nbsp;&nbsp;Mystery laughter
-            </h3>
-          </div> */}
           <div className="flex flex-row gap-3 items-center">
             <img src="/image/money-bag.png" alt="" className="w-10 h-10" />
             <h1 className="text-2xl font-bold">
               {formatNumberWithCommas(token)}
             </h1>
           </div>
-          {/* <div className="flex flex-row gap-10">
-            <h5 className="text-xl text-white">
-              GDP : {formatNumberWithCommas(total)}
-            </h5>
-
-            <h5 className="text-xl text-white">
-              level : {formatNumberWithCommas(levelState)}
-            </h5>
-          </div> */}
         </div>
         <div>
           <div

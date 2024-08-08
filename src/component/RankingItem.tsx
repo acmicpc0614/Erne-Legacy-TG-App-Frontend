@@ -2,7 +2,7 @@ import { useState } from "react";
 import { formatNumberWithCommas } from "../store";
 import Modal from "./modal";
 
-const RankingItem: React.FC<RankingItemProps> = ({ index, data }) => {
+const RankingItem: React.FC<RankingItemProps> = ({ index, data, username }) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const handleClick = () => {
     setIsModalOpen(true);
@@ -14,9 +14,11 @@ const RankingItem: React.FC<RankingItemProps> = ({ index, data }) => {
   return (
     <>
       <div
-        className={`flex ${
-          index > 0 && "my-3"
-        } px-3 py-2 items-center bg-[#363636] hover:bg-[#5f5f5f]  border-l-[#4aff86] border-l-[6px] border-transparent rounded-2xl gap-2`}
+        className={`flex ${index > 0 && "my-3"} px-1 py-2 items-center ${
+          username !== data.username
+            ? "bg-[#363636] hover:bg-[#5f5f5f]"
+            : "bg-[#54706f] hover:bg-[#383f3f]"
+        }  border-l-[#4aff86] border-l-[6px] border-transparent rounded-2xl gap-2`}
         onClick={() => handleClick()}
       >
         <div className="text-xl text-start w-[20%] font-sans text-[#8a8888] font-bold flex justify-center align-middle">
@@ -40,7 +42,7 @@ const RankingItem: React.FC<RankingItemProps> = ({ index, data }) => {
             {data.username}
           </p>
         </div>
-        <p className="text-xl text-end pr-4 w-[30%] font-sans text-[#8a8888] font-bold">
+        <p className="text-md text-end pr-3 w-[30%] font-sans text-[#8a8888] font-bold">
           {formatNumberWithCommas(data.totalPoint)}
         </p>
       </div>
@@ -83,4 +85,5 @@ export default RankingItem;
 interface RankingItemProps {
   index: number; // The target date as a string
   data: any;
+  username: string;
 }
