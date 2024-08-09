@@ -34,7 +34,8 @@ export default function QuestList() {
         <h1 className=" text-white text-3xl">Invite friends!</h1>
         <p className=" text-white">You and your friend will receive bonuses</p>
       </div>
-      <div className="flex items-center h-24 max-sm:h-24 justify-between px-3 py-2 my-4 bg-[#363636] rounded-[20px]">
+
+      <div className="flex items-center h-24 max-sm:h-24 justify-between px-3 py-2 my-4 bg-[#363636] hover:bg-[#5f5f5f]  border-l-[#ffb14a] border-l-[4px] border-transparent rounded-2xl">
         <div className="flex justify-start items-center">
           <img src="image/bonus.png" alt="" className=" w-14 h-14" />
           <div className=" flex flex-col justify-start">
@@ -49,7 +50,7 @@ export default function QuestList() {
           </div>
         </div>
       </div>
-      <div className="flex items-center h-24 max-sm:h-24 justify-between px-3 py-2 my-4 bg-[#363636] rounded-[20px]">
+      <div className="flex items-center h-24 max-sm:h-24 justify-between px-3 py-2 my-4 bg-[#363636] hover:bg-[#5f5f5f]  border-l-[#ffb14a] border-l-[4px] border-transparent rounded-2xl">
         <div className="flex justify-start items-center">
           <img src="image/bonus.png" alt="" className=" w-14 h-14" />
           <div className=" flex flex-col justify-start">
@@ -64,6 +65,8 @@ export default function QuestList() {
           </div>
         </div>
       </div>
+
+      {/* friends list */}
       <div className="flex flex-col justify-start items-start">
         <h2 className="text-white text-sm">List of your friends</h2>
         <div className=" rounded-[20px] bg-[#525252] w-full h-16 flex justify-center items-center">
@@ -77,6 +80,7 @@ export default function QuestList() {
           </select>
         </div>
       </div>
+      {/* invite a friend */}
       <div className="flex justify-between items-center align-middle w-full h-12 mt-8">
         <div className="w-[90%] h-12 bg-indigo-600 text-white rounded-[20px] flex items-center justify-center hover:bg-indigo-400">
           <span className="flex justify-center items-center">
@@ -87,7 +91,7 @@ export default function QuestList() {
           <div
             style={{
               backgroundImage: isCopied
-                ? "url('image/checked.png')"
+                ? "url('image/tick.png')"
                 : "url('image/link.png')",
               backgroundRepeat: "no-repeat",
               backgroundSize: "cover",

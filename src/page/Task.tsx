@@ -98,18 +98,18 @@ export default function Task() {
   return (
     <div className="Ranking max-w-full mx-auto text-white mt-8">
       <ToastContainer />
-      <div className="flex flex-col justify-center items-center">
-        <img src="image/dollar.png" alt="" className=" w-20 h-20" />
+      <div className="flex flex-col justify-center items-center ">
+        <img src="image/dollar.png" alt="" className=" w-20 h-20 loader-gold" />
         <h2 className=" text-xl">Earn more coins</h2>
       </div>
 
       <div className="flex flex-col justify-center p-7 gap-4">
         <div
-          className="flex px-3 h-[75px] items-center bg-[#363636] hover:bg-[#5f5f5f]  border-l-[#4aff86] border-l-[6px] border-transparent rounded-2xl gap-2"
+          className="flex px-3 h-[75px] items-center bg-[#363636] hover:bg-[#5f5f5f]  border-l-[#ffb14a] border-l-[4px] border-transparent rounded-2xl "
           onClick={handleGetDailyEarning}
         >
-          <div className="flex justify-start items-center">
-            <img src="image/cdollar.png" alt="" className=" w-14 h-14" />
+          <div className="flex justify-start items-center gap-4">
+            <img src="image/cdollar.png" alt="" className=" w-10 h-10" />
             <div className=" flex flex-col justify-start">
               <div className="text-left justify-start items-center text-white ml-3 font-bold">
                 Daily reward
@@ -126,11 +126,11 @@ export default function Task() {
         </div>
 
         <div
-          className="flex px-3 h-[75px] items-center bg-[#363636] hover:bg-[#5f5f5f]  border-l-[#4aff86] border-l-[6px] border-transparent rounded-2xl gap-2"
+          className="flex px-3 h-[75px] items-center bg-[#363636] hover:bg-[#5f5f5f]  border-l-[#ffb14a] border-l-[4px] border-transparent rounded-2xl "
           onClick={handleJoinTelegramGroup}
         >
-          <div className="flex justify-start items-center">
-            <img src="image/telegram.png" alt="" className=" w-14 h-14" />
+          <div className="flex justify-start items-center gap-4">
+            <img src="image/telegram.png" alt="" className=" w-10 h-10" />
             <div className=" flex flex-col justify-start">
               <div className="text-left justify-start items-center text-white ml-3 font-bold">
                 Join Our TG Group
@@ -143,11 +143,11 @@ export default function Task() {
           </div>
         </div>
         <div
-          className="flex px-3 h-[75px] items-center bg-[#363636] hover:bg-[#5f5f5f]  border-l-[#4aff86] border-l-[6px] border-transparent rounded-2xl gap-2"
+          className="flex px-3 h-[75px] items-center bg-[#363636] hover:bg-[#5f5f5f]  border-l-[#ffb14a] border-l-[4px] border-transparent rounded-2xl "
           onClick={handleSubscribeTelegramChannel}
         >
-          <div className="flex justify-start items-center">
-            <img src="image/telegram.png" alt="" className=" w-14 h-14" />
+          <div className="flex justify-start items-center gap-4">
+            <img src="image/telegram.png" alt="" className=" w-10 h-10" />
             <div className=" flex flex-col justify-start">
               <div className="text-left justify-start items-center text-white ml-3 font-bold">
                 Subscribe Our TG Channel
@@ -159,10 +159,10 @@ export default function Task() {
             </div>
           </div>
         </div>
-        {/* <div className="flex px-3 h-[75px] items-center bg-[#363636] hover:bg-[#5f5f5f]  border-l-[#4aff86] border-l-[6px] border-transparent rounded-2xl gap-2">
+        {/* <div className="flex px-3 h-[75px] items-center bg-[#363636] hover:bg-[#5f5f5f]  border-l-[#ffb14a] border-l-[4px] border-transparent rounded-2xl ">
           <div className="flex justify-start items-center">
             <img src="image/twitter.png" alt="" className=" w-14 h-14" />
-            <div className=" flex flex-col justify-start">
+            <div className=" flex flex-col justify-start gap-4">
               <div className="text-left justify-start items-center text-white ml-3 font-bold">
                 Follow our X account
               </div>

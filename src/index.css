@@ -87,3 +87,19 @@ button:focus-visible {
     box-shadow: 0 0 0 34px #69ffa800;
   }
 }
+
+.loader-gold {
+  border-radius: 50%;
+  background-color: #ffb14a;
+  animation: 1.5s pulse-gold infinite ease-in-out;
+}
+
+@keyframes pulse-gold {
+  0% {
+    box-shadow: 0 0 0 0 #ffb14a;
+  }
+
+  100% {
+    box-shadow: 0 0 0 34px #ff094600;
+  }
+}
