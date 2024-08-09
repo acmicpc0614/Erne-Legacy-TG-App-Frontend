@@ -225,28 +225,28 @@ function Home() {
       />
       {/* <CountDate date={1} />   */}
       <div className="relative mt-8 flex flex-col items-center w-full mb-9">
-        <div className="flex flex-col justify-center items-center mb-7">
+        <div className="flex flex-col justify-center items-center mb-2">
           <div className="flex flex-row gap-3 items-center">
             <img src="/image/money-bag.png" alt="" className="w-10 h-10" />
-            <h1 className="text-2xl font-bold">
+            <div className="text-2xl font-bold text-[#eeeeee]">
               {formatNumberWithCommas(token)}
-            </h1>
+            </div>
           </div>
         </div>
         <div>
           <div
-            className={`relative bg-[url('/image/Bitmap3.png')] mb-7 rounded-full bg-cover z-50 w-[400px] h-[400px] max-sm:w-[280px] max-sm:h-[280px] ${
+            className={`relative bg-[url('/image/Bitmap1.png')] mt-7 rounded-full bg-cover z-50 w-[260px] h-[260px] loader ${
               remainedEnergy > 0
                 ? "cursor-pointer"
                 : "cursor-not-allowed opacity-50"
-            } ${imgStatus ? " border-[5px]" : "border-0"}`}
+            } `}
             ref={bodyRef}
             onMouseDown={handleMouseDown}
             onMouseUp={handleMouseLeave}
             onClick={handleTap}
           />
         </div>
-        <div className="flex flex-row justify-between w-full px-8 max-sm:px-4 mt-4">
+        <div className="flex flex-row justify-between w-full px-8 max-sm:px-4 mt-2">
           <div className="flex justify-between w-full">
             <h3 className="flex justify-center items-center text-2xl mb-2 text-white flex-row">
               <span className="text-3xl ">

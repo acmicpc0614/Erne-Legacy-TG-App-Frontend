@@ -14,14 +14,14 @@ const RankingItem: React.FC<RankingItemProps> = ({ index, data, username }) => {
   return (
     <>
       <div
-        className={`flex ${index > 0 && "my-3"} px-1 py-2 items-center ${
+        className={`flex ${index > 0 && "my-3"} px-1 py-0 items-center ${
           username !== data.username
             ? "bg-[#363636] hover:bg-[#5f5f5f]"
             : "bg-[#54706f] hover:bg-[#383f3f]"
-        }  border-l-[#4aff86] border-l-[6px] border-transparent rounded-2xl gap-2`}
-        onClick={() => handleClick()}
+        }  border-l-[#ffb14a] border-l-[4px] border-transparent rounded-xl gap-2`}
+        onClick={handleClick}
       >
-        <div className="text-xl text-start w-[20%] font-sans text-[#8a8888] font-bold flex justify-center align-middle">
+        <div className="text-xl text-start w-[20%] font-sans text-[#eeeeee] font-bold flex justify-center align-middle">
           {index == 0 ? (
             <img src="image/crown.png" alt="" width={30} height={30} />
           ) : index == 1 ? (
@@ -34,15 +34,15 @@ const RankingItem: React.FC<RankingItemProps> = ({ index, data, username }) => {
         </div>
         <div className="relative overflow-hidden h-10 w-[50%] flex items-center justify-start gap-2 ">
           <img
-            src="/image/Bitmap3.png"
+            src="/image/add-friend.png"
             alt="avatar"
             className="w-8 h-8 rounded-xl"
           />
-          <p className="text-md text-start font-sans overflow-hidden text-[#8a8888] font-bold">
+          <p className="text-md text-start font-sans overflow-hidden text-[#eeeeee] font-bold">
             {data.username}
           </p>
         </div>
-        <p className="text-md text-end pr-3 w-[30%] font-sans text-[#8a8888] font-bold">
+        <p className="text-md text-end pr-3 w-[30%] font-sans text-[#eeeeee] font-bold">
           {formatNumberWithCommas(data.totalPoint)}
         </p>
       </div>
@@ -54,22 +54,22 @@ const RankingItem: React.FC<RankingItemProps> = ({ index, data, username }) => {
               alt="avatar"
               className=" w-8 h-8 rounded-md"
             />
-            <h1 className="text-2xl font-sans  text-[#8a8888] font-bold">
+            <h1 className="text-2xl font-sans  text-[#eeeeee] font-bold">
               {data.username}
             </h1>
           </div>
-          <p className=" text-sm font-sans  text-[#8a8888] font-bold">
+          <p className=" text-sm font-sans  text-[#eeeeee] font-bold">
             level&nbsp;{data.level}
           </p>
           <div className="flex items-center">
             <img src="image/dollar.png" alt="" className=" w-6 h-6" />
             &nbsp;
-            <h1 className="font-sans  text-[#8a8888] font-bold text-2xl">
+            <h1 className="font-sans  text-[#eeeeee] font-bold text-2xl">
               {data.totalPoint}
             </h1>
           </div>
           <div
-            className="w-full h-9 bg-indigo-600 font-sans  text-[#8a8888] font-bold rounded-[20px] flex justify-center items-center"
+            className="w-full h-9 bg-indigo-600 font-sans  text-[#eeeeee] font-bold rounded-[20px] flex justify-center items-center"
             onClick={handleCloseModal}
           >
             <span className="flex justify-center items-center">OK</span>

@@ -13,7 +13,7 @@ import { Provider as ReduxProvider } from "react-redux";
 import { store } from "./store";
 import Boost from "./page/Boost";
 import Task from "./page/Task";
-const LOADINGTIME = 1000;
+const LOADINGTIME = 5000;
 function App() {
   const [loading, setLoading] = useState(false);
 

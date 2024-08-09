@@ -70,3 +70,20 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+/* pulse effect */
+.loader {
+  border-radius: 50%;
+  background-color: #69ffa8;
+  animation: 1.5s pulse infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 #69a5ff;
+  }
+
+  100% {
+    box-shadow: 0 0 0 34px #69ffa800;
+  }
+}
