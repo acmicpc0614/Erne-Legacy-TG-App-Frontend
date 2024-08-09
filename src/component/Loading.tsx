@@ -3,7 +3,9 @@ import "./Loading.css";
 const Loading = () => {
   return (
     <div className="flex flex-col items-center gap-20 justify-center">
-      <div className="text-3xl font-bold text-[#eeeeee]">Erne Legacy App</div>
+      <div className="text-6xl  font-bold text-[#eeeeee] font-lilita">
+        Erne Legacy App
+      </div>
       <div className="spinner">
         <span></span>
         <span></span>

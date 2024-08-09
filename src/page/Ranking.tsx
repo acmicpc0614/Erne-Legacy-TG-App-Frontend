@@ -37,12 +37,12 @@ export default function Ranking() {
         <div className="flex flex-row justify-between mb-3">
           <div className="overflow-hidden h-10 flex items-center gap-2 ">
             <img
-              src="/image/Bitmap3.png"
+              src="/image/Bitmap1_1.png"
               alt="avatar"
               className="w-10 h-10 rounded-xl aspect-[1/1]"
             />
             <p className="text-2xl text-start font-sans overflow-hidden text-[#eeeeee] font-bold">
-              telegram
+              {username}
             </p>
           </div>
           <div className="flex flex-col">

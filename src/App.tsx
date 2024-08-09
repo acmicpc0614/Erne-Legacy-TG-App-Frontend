@@ -33,13 +33,12 @@ function App() {
           <ReduxProvider store={store}>
             <div className="overflow-y-auto h-full">
               <Routes>
-                {/* <Route path="/" element={<Layout />}> */}
+                {/* <Route path="" element={<Loading />} /> */}
                 <Route index element={<Home />} />
                 <Route path="ranking" element={<Ranking />} />
                 <Route path="quest" element={<Quest />} />
                 <Route path="boost" element={<Boost />} />
                 <Route path="task" element={<Task />} />
-                {/* </Route> */}
               </Routes>
             </div>
             <ToastContainer />
