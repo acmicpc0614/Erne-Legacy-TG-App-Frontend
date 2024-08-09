@@ -64,29 +64,28 @@ function Home() {
   // console.log("passItemLevel effect =>", passItemLevel);
   // }, [passItemLevel]);
   useEffect(() => {
-    setUsername("telegram");
-    axios.post(`/earnings/add`, { username: "telegram" });
-    dispatch(insertWallet("telegram"));
-    dispatch(getWallet("telegram")).then(() => {
-      setTap(tapState);
-      setToken(tokenState);
-      setTotal(totalState);
-      setRemainedEnergy(energyState);
-      setpassItemStartTime(passItemStartTimeState);
-    });
-    // const webapp = (window as any).Telegram?.WebApp.initDataUnsafe;
-    // console.log("=========>webapp", webapp);
-    // if (webapp) {
-
-    //   setUsername(webapp["user"]["username"]);
-    //   axios.post(`/earnings/add`, {username: webapp["user"]["username"]})
-    //   dispatch(insertWallet(webapp["user"]["username"]));
-    //   dispatch(getWallet(webapp["user"]["username"])).then(() => {
-    //     setTap(tapState);
-    //     setToken(tokenState);
-    //     setRemainedEnergy(energyState);
-    //   });
-    // }
+    // setUsername("telegram");
+    // axios.post(`/earnings/add`, { username: "telegram" });
+    // dispatch(insertWallet("telegram"));
+    // dispatch(getWallet("telegram")).then(() => {
+    //   setTap(tapState);
+    //   setToken(tokenState);
+    //   setTotal(totalState);
+    //   setRemainedEnergy(energyState);
+    //   setpassItemStartTime(passItemStartTimeState);
+    // });
+    const webapp = (window as any).Telegram?.WebApp.initDataUnsafe;
+    console.log("=========>webapp", webapp);
+    if (webapp) {
+      setUsername(webapp["user"]["username"]);
+      axios.post(`/earnings/add`, { username: webapp["user"]["username"] });
+      dispatch(insertWallet(webapp["user"]["username"]));
+      dispatch(getWallet(webapp["user"]["username"])).then(() => {
+        setTap(tapState);
+        setToken(tokenState);
+        setRemainedEnergy(energyState);
+      });
+    }
     if (passItemLevelState) {
       miningInterval = setInterval(() => {
         console.log("passive mining", passItemLevel);
@@ -166,7 +165,7 @@ function Home() {
       passItemLevel > 0 &&
       Date.now() - passItemStartTime > PassItemLimitTime[passItemLevel] * 1000
     ) {
-      dispatch(removeBonusCard("telegram", total, token));
+      dispatch(removeBonusCard(username, total, token));
       setpassItemLevel(() => 0);
       // console.log("pre passItemLevel =>", passItemLevel);
 
@@ -215,7 +214,6 @@ function Home() {
   const handleMouseLeave = () => {
     setImgStatus(false);
   };
-
   return (
     <div className="mt-8">
       <ToastContainer />

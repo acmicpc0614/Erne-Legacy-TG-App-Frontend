@@ -31,7 +31,9 @@ const ScoreBoard: React.FC<ScoreBoardProps> = ({ tapUnit, gdp, passive }) => {
             <h1 className="text-sm font-bold text-[#eeeeee]">Earn per Tap</h1>
             <div className="flex flex-row items-center justify-center gap-1">
               <img src="/image/dollar.png" alt="dollar" className="w-4 h-4" />
-              <h1 className="text-sm font-bold text-[#eeeeee]">+{tapUnit}</h1>
+              <h1 className="text-sm font-bold text-[#eeeeee]">
+                +{tapUnit ? tapUnit : 1}
+              </h1>
             </div>
           </div>
         </div>

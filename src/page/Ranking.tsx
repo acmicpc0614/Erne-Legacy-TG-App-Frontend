@@ -4,6 +4,8 @@ import { dispatch, useSelector } from "../store";
 import { getAllUsers } from "../store/reducers/wallet";
 export default function Ranking() {
   const users_state = useSelector((state) => state?.wallet?.users);
+  const username = useSelector((state) => state.wallet.user?.username);
+
   const [usersa, setUsers] = useState(users_state);
   // const [userRank, setUserRank] = useState<number>(1);
   // useEffect(() => {
@@ -45,7 +47,7 @@ export default function Ranking() {
           </div>
           <div className="flex flex-col">
             <div className="text-md  justify-end pr-4 font-sans text-[#eeeeee] font-bold flex items-center">
-              {findUserRank("telegram")} th
+              {findUserRank(username)} th
             </div>
             <div className="flex items-center gap-1">
               <img
@@ -54,7 +56,7 @@ export default function Ranking() {
                 className="w-6 h-6 rounded-xl"
               />
               <p className="text-md  text-end pr-4 w-[50%] font-sans text-[#eeeeee] font-bold">
-                {findUserGDP("telegram")}
+                {findUserGDP(username)}
               </p>
             </div>
           </div>
@@ -74,7 +76,7 @@ export default function Ranking() {
       </div>
 
       <div className=" overflow-y-auto">
-        <RankingList usersa={usersa} username={"telegram"} />
+        <RankingList usersa={usersa} username={username} />
       </div>
     </div>
   );
