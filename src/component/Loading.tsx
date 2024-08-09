@@ -14,7 +14,7 @@ const Loading = () => {
         <span></span>
         <span></span>
       </div>
-      <div className="flex flex-col items-center mt-14 gap-4">
+      <div className="flex flex-col items-center mt-14 gap-4 text-[#eeeeee]">
         <div>Meet the Worldwide Community</div>
         <div className="flex flex-row gap-5">
           <svg
