@@ -50,6 +50,7 @@ function Home() {
   const [passItemLevel, setpassItemLevel] =
     useState<number>(passItemLevelState);
   let miningInterval: any;
+  console.log(imgStatus);
   // const [lastTime, setLastTime] = useState<number>(lastTimeState);
 
   // const [tapUnit, setTapUnit] = useState<number>(0);
