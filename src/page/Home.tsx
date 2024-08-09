@@ -104,7 +104,9 @@ function Home() {
       };
     }
   }, []);
-
+  if (total == -1) {
+    setpassItemStartTime(1);
+  }
   useEffect(() => {
     setLimit(limitState);
   }, [limitState]);
