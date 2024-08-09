@@ -75,20 +75,16 @@ export default function Task() {
   const handleGetDailyEarning = async () => {
     // setUsername("telegram");
     try {
-      await axios
-        .post(`/wallet/getDailyEarn/${username ? username : "telegram"}`)
-        .then((res) => {
-          // await axios.post(`/wallet/getDailyEarn/telegram`).then((res) => {
-          if (res.status === 200) {
-            toast.success(
-              "You have received +1000 daily Earning successfully!"
-            );
-            setTargetData(Date.now() - (Date.now() % DAY) + DAY);
-          } else
-            toast.info(
-              "You earned already today's daily earnings! Please try tomorrow."
-            );
-        });
+      await axios.post(`/wallet/getDailyEarn/${username}`).then((res) => {
+        // await axios.post(`/wallet/getDailyEarn/telegram`).then((res) => {
+        if (res.status === 200) {
+          toast.success("You have received +1000 daily Earning successfully!");
+          setTargetData(Date.now() - (Date.now() % DAY) + DAY);
+        } else
+          toast.info(
+            "You earned already today's daily earnings! Please try tomorrow."
+          );
+      });
     } catch (error) {
       console.log(error);
       toast.warning("Unknown error occurred. Please try again later.");

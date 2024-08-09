@@ -11,12 +11,10 @@ export default function Ranking() {
   useEffect(() => {
     const fetchUsers = async () => {
       // console.log("getAllUsers calling... 2");
-
       try {
         await dispatch(getAllUsers());
         // console.log("users_state =>", users_state);
-        setUsers((prev) => users_state);
-        // console.log("users =>", usersa);
+        setUsers(() => users_state);
       } catch (error) {
         console.error("Error fetching users:", error);
       }

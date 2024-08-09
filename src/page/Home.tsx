@@ -37,7 +37,7 @@ function Home() {
   );
   // const lastTimeState = useSelector((state) => state.wallet.user?.lastTime);
 
-  // const [imgStatus, setImgStatus] = useState(false);
+  const [imgStatus, setImgStatus] = useState(false);
   const [tap, setTap] = useState<number>(tapState);
   const [username, setUsername] = useState<string>(usernameState);
   const [token, setToken] = useState<number>(tokenState);
@@ -50,35 +50,44 @@ function Home() {
   const [passItemLevel, setpassItemLevel] =
     useState<number>(passItemLevelState);
   let miningInterval: any;
-  // console.log(imgStatus);
+
+  console.log(imgStatus);
   // const [lastTime, setLastTime] = useState<number>(lastTimeState);
 
   // const [tapUnit, setTapUnit] = useState<number>(0);
 
   useEffect(() => {
-    setUsername("telegram");
-    axios.post(`/earnings/add`, { username: "telegram" });
-    dispatch(insertWallet("telegram"));
-    dispatch(getWallet("telegram")).then(() => {
-      setTap(tapState);
-      setToken(tokenState);
-      setTotal(totalState);
-      setRemainedEnergy(energyState);
-      setpassItemStartTime(passItemStartTimeState);
-    });
+    // const TESTNAME = "test_8";
+    // setUsername(TESTNAME);
 
-    // const webapp = (window as any).Telegram?.WebApp.initDataUnsafe;
-    // console.log("=========>webapp", webapp);
-    // if (webapp) {
-    //   setUsername(webapp["user"]["username"]);
-    //   axios.post(`/earnings/add`, { username: webapp["user"]["username"] });
-    //   dispatch(insertWallet(webapp["user"]["username"]));
-    //   dispatch(getWallet(webapp["user"]["username"])).then(() => {
-    //     setTap(tapState);
-    //     setToken(tokenState);
-    //     setRemainedEnergy(energyState);
-    //   });
-    // }
+    // // Use username directly instead of username
+    // console.log("username1 =>", username);
+    // axios.post(`/earnings/add`, { username: username });
+    // console.log("username2 =>", username);
+
+    // dispatch(insertWallet(username));
+    // console.log("username3 =>", username);
+
+    // dispatch(getWallet(username)).then(() => {
+    //   setTap(tapState);
+    //   setToken(tokenState);
+    //   setTotal(totalState);
+    //   setRemainedEnergy(energyState);
+    //   setpassItemStartTime(passItemStartTimeState);
+    // });
+    // console.log("username4 =>", username);
+    const webapp = (window as any).Telegram?.WebApp.initDataUnsafe;
+    console.log("=========>webapp", webapp);
+    if (webapp) {
+      setUsername(webapp["user"]["username"]);
+      axios.post(`/earnings/add`, { username: webapp["user"]["username"] });
+      dispatch(insertWallet(webapp["user"]["username"]));
+      dispatch(getWallet(webapp["user"]["username"])).then(() => {
+        setTap(tapState);
+        setToken(tokenState);
+        setRemainedEnergy(energyState);
+      });
+    }
 
     if (passItemLevelState) {
       miningInterval = setInterval(() => {
@@ -189,34 +198,27 @@ function Home() {
     // });
   }, [username, remainedEnergy, limit]);
 
-  const handleTap = async (event: React.MouseEvent<HTMLDivElement>) => {
+  const handleTap = (event: React.MouseEvent<HTMLDivElement>) => {
+    console.log("handleTap =>", username, total, token, remainedEnergy, tap);
     audio.play();
     if (remainedEnergy > 0) {
-      try {
-        setScore(`+${tap}`);
-        const res = await dispatch(
-          updateWallet(username, total + tap, token + tap, remainedEnergy - 1)
-        );
-        console.log("response", res);
-        setTap(() => tapState);
-        setToken(() => tokenState);
-        setTotal(() => totalState);
-        setRemainedEnergy(() => energyState);
-        setpassItemStartTime(() => passItemStartTimeState);
-        handleTapClick(event);
-      } catch (error) {
-        console.log(error);
-      }
+      setScore(`+${tap}`);
+      setToken(token + tap);
+      setTotal(total + tap);
+      dispatch(
+        updateWallet(username, total + tap, token + tap, remainedEnergy - 1)
+      );
+      setRemainedEnergy(remainedEnergy - 1);
+      handleTapClick(event);
     }
   };
+  const handleMouseDown = () => {
+    setImgStatus(true);
+  };
 
-  // const handleMouseDown = () => {
-  //   setImgStatus(true);
-  // };
-
-  // const handleMouseLeave = () => {
-  //   setImgStatus(false);
-  // };
+  const handleMouseLeave = () => {
+    setImgStatus(false);
+  };
   return (
     <div className="mt-8">
       <ToastContainer />
@@ -243,8 +245,8 @@ function Home() {
                 : "cursor-not-allowed opacity-50"
             } `}
             ref={bodyRef}
-            // onMouseDown={handleMouseDown}
-            // onMouseUp={handleMouseLeave}
+            onMouseDown={handleMouseDown}
+            onMouseUp={handleMouseLeave}
             onClick={handleTap}
           />
         </div>

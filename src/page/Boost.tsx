@@ -33,7 +33,7 @@ export default function Boost() {
     //   username ? username : "telegram"
     // );
 
-    dispatch(updateEnergy(username ? username : "telegram", limit));
+    dispatch(updateEnergy(username, limit));
     toast.success("Successfully updated energy!");
     setIsModalOpen(false);
   };
@@ -54,7 +54,7 @@ export default function Boost() {
       );
       return;
     }
-    dispatch(buyBonusCard(username ? username : "telegram", token - 1000));
+    dispatch(buyBonusCard(username, token - 1000));
     setIsBonusModalOpen(false);
     toast.success("Successfully purchase card.");
   };

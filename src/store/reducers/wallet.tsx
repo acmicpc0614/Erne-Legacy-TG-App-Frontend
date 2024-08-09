@@ -82,7 +82,7 @@ export function insertWallet(username: string) {
   return async () => {
     try {
       const response = await axios.post("/wallet/add", {
-        username: username ?? "telegram",
+        username: username,
       });
       if (response.status === 200)
         dispatch(wallet?.actions?.addWalletSuccess(response?.data));
