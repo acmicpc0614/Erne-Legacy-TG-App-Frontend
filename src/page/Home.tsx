@@ -60,7 +60,7 @@ function Home() {
     // const TESTNAME = "test_8";
     // setUsername(TESTNAME);
 
-    // // Use username directly instead of username
+    // Use username directly instead of username
     // console.log("username1 =>", username);
     // axios.post(`/earnings/add`, { username: username });
     // console.log("username2 =>", username);

@@ -2,6 +2,7 @@ import RankingList from "../component/RankingList";
 import { useEffect, useState } from "react";
 import { dispatch, useSelector } from "../store";
 import { getAllUsers } from "../store/reducers/wallet";
+import LoadingComponent from "../component/LoadingComponent";
 export default function Ranking() {
   const users_state = useSelector((state) => state?.wallet?.users);
   const username = useSelector((state) => state.wallet.user?.username);
@@ -83,7 +84,9 @@ export default function Ranking() {
           <RankingList usersa={usersa} username={username} />
         </div>
       ) : (
-        <div>loading...</div>
+        <div className="flex items-center justify-center h-[300px]">
+          <LoadingComponent />
+        </div>
       )}
     </div>
   );
