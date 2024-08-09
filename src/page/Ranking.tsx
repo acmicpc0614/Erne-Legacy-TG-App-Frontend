@@ -8,17 +8,22 @@ export default function Ranking() {
 
   const [usersa, setUsers] = useState(users_state);
   // const [userRank, setUserRank] = useState<number>(1);
-  // useEffect(() => {
-  //   dispatch(getAllUsers()).then(() => {
-  //     setUsers(usersa);
-  //   });
-  // }, [users_state]);
   useEffect(() => {
-    // console.log("getallusers calling...");
-    dispatch(getAllUsers()).then(() => {
-      setUsers(usersa);
-    });
-  }, []);
+    const fetchUsers = async () => {
+      // console.log("getAllUsers calling... 2");
+
+      try {
+        await dispatch(getAllUsers());
+        // console.log("users_state =>", users_state);
+        setUsers((prev) => users_state);
+        // console.log("users =>", usersa);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
+    };
+
+    fetchUsers();
+  }, [users_state]);
 
   const findUserRank = (username: string) => {
     for (let i = 0; i < usersa.length; i++)
