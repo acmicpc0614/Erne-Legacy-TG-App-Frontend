@@ -78,9 +78,13 @@ export default function Ranking() {
         </div>
       </div>
 
-      <div className=" overflow-y-auto">
-        <RankingList usersa={usersa} username={username} />
-      </div>
+      {users_state.length ? (
+        <div className=" overflow-y-auto">
+          <RankingList usersa={usersa} username={username} />
+        </div>
+      ) : (
+        <div>loading...</div>
+      )}
     </div>
   );
 }
