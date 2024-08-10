@@ -5,7 +5,6 @@ import { toast, ToastContainer } from "react-toastify";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import axios from "../utils/api";
 import { FaSearch } from "react-icons/fa"; // Importing a search icon from react-icons
-// import { CopyToClipboard } from "react-copy-to-clipboard";
 import { initUtils } from "@telegram-apps/sdk";
 
 export default function QuestList() {
@@ -57,6 +56,25 @@ export default function QuestList() {
     );
   };
 
+  const InviteFriendsItems: any[] = [
+    {
+      id: 1,
+      icon: "/image/bonus.png",
+      label: "Invite a friend",
+      bonus: "+ 1000",
+      url: "https://t.me/Kamamuri_bot?start=your_username",
+      onCopy: handleCopy,
+    },
+    {
+      id: 2,
+      icon: "/image/telegram.png",
+      label: "Invite a friend with TG premium",
+      bonus: "+ 1000",
+      url: "https://t.me/Kamamuri_bot?start=your_username",
+      onCopy: handleCopyTwo,
+    },
+  ];
+
   return (
     <div className="overflow-auto p-5 h-[90vh] ">
       <ToastContainer />
@@ -64,47 +82,29 @@ export default function QuestList() {
         <h1 className=" text-white text-3xl">Invite friends!</h1>
         <p className=" text-white">You and your friend will receive bonuses</p>
       </div>
-      <CopyToClipboard text={textToCopy} onCopy={handleCopy}>
-        <div className="flex items-center h-20 max-sm:h-20 justify-between px-3 py-2 my-4 bg-[#363636] hover:bg-[#5f5f5f]  border-l-[#ffb14a] border-l-[4px] border-transparent rounded-2xl hover:cursor-pointer">
-          <div className="flex justify-start items-center">
-            <img src="image/bonus.png" alt="" className=" w-14 h-14" />
+
+      {InviteFriendsItems.map((item) => (
+        <CopyToClipboard text={textToCopy} onCopy={item.onCopy}>
+          <div className="flex items-center h-20 max-sm:h-20 justify-start px-3 py-2 my-4 bg-[#363636] hover:bg-[#5f5f5f]  border-l-[#ffb14a] border-l-[4px] border-transparent rounded-2xl hover:cursor-pointer">
+            <img src={item.icon} alt={item.label} className=" w-12 h-12" />
             <div className=" flex flex-col justify-start">
               <div className="text-left justify-start items-center text-white ml-3 font-bold">
-                Invite a friend
+                {item.label}
               </div>
-              <div className="flex flex-row">
-                <div className="flex justify-start items-center ml-2">
-                  <img src="image/dollar.png" alt="" className=" w-5 h-5" />
-                  <span className=" text-amber-400">+ 1000</span>
-                  <span>&nbsp;&nbsp;&nbsp;for you and your friend</span>
-                </div>
+
+              <div className="flex flex-row justify-start items-center ml-2 gap-1">
+                <img src="image/dollar.png" alt="dollar" className=" w-4 h-4" />
+                <span className="text-sm text-amber-400">{item.bonus}</span>
               </div>
             </div>
           </div>
-        </div>
-      </CopyToClipboard>
-      <CopyToClipboard text={textToCopy} onCopy={handleCopyTwo}>
-        <div className="flex items-center h-20 max-sm:h-20 justify-between px-3 py-2 my-4 bg-[#363636] hover:bg-[#5f5f5f]  border-l-[#ffb14a] border-l-[4px] border-transparent rounded-2xl hover:cursor-pointer">
-          <div className="flex justify-start items-center">
-            <img src="image/bonus.png" alt="" className=" w-14 h-14" />
-            <div className=" flex flex-col justify-start">
-              <div className="text-left justify-start items-center text-white font-bold ml-3">
-                Invite a friend with Telegram premium
-              </div>
-              <div className="flex justify-start items-center ml-2">
-                <img src="image/dollar.png" alt="" className=" w-5 h-5" />
-                <span className=" text-amber-400">+ 1000</span>
-                <span>&nbsp;&nbsp;&nbsp;for you and your friend</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </CopyToClipboard>
+        </CopyToClipboard>
+      ))}
       {/* friends list */}
       <div className="flex flex-col items-start gap-2 ">
         <div className="flex flex-row justify-between w-full h-7">
           <div className="text-white text-sm">List of your friends</div>
-          <div className="relative  w-[200px] border-b-2 border-b-gray-300  rounded-md ">
+          <div className="relative  w-[200px] border-b-2 border-b-[#505050]  rounded-lg ">
             <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
             <input
               className=" text-center text-sm w-[120px] bg-transparent focus:outline-none right-0"

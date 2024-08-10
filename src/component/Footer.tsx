@@ -33,7 +33,7 @@ export default function Footer() {
   ];
 
   return (
-    <div className="flex flex-row justify-around items-center bottom-0 px-2  w-full h-[70px]  bg-[#353535] rounded-t-xl absolute z-[1000] font-mono">
+    <div className="flex flex-row justify-around items-center bottom-0 px-2  w-full h-[70px]  bg-[#353535] rounded-t-xl absolute z-[1000] font-mono ">
       {NavItems.map((item) => (
         <Link
           to={item.path}
