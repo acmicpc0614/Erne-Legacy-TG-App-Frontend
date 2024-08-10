@@ -9,7 +9,7 @@ import { FaSearch } from "react-icons/fa"; // Importing a search icon from react
 import { initUtils } from "@telegram-apps/sdk";
 
 export default function QuestList() {
-  const utils = initUtils();
+  // const utils = initUtils();
   const username_state = useSelector((state) => state.wallet.user?.username);
   const [username, setUsername] = useState<string>(username_state);
   // const [isCopied, setIsCopied] = useState(false);
@@ -29,8 +29,8 @@ export default function QuestList() {
     const tmpTEXT =
       "OurApp: Your first crypto wealth. Join, share, and earn airdrops!";
     let fullURL = `https://t.me/share/url?url=${tmpURL}&text=${tmpTEXT}`;
-    console.log("fullURL =>", fullURL);
-    utils.openTelegramLink(fullURL);
+    // console.log("fullURL =>", fullURL);
+    // utils.openTelegramLink(fullURL);
   };
   const handleCopy = async () => {
     toast.success("Copied to clipboard!");
@@ -58,7 +58,7 @@ export default function QuestList() {
   };
 
   return (
-    <div className="overflow-auto p-5 h-[90vh]">
+    <div className="overflow-auto p-5 h-[90vh] ">
       <ToastContainer />
       <div className="flex flex-col justify-between items-center">
         <h1 className=" text-white text-3xl">Invite friends!</h1>
@@ -116,14 +116,20 @@ export default function QuestList() {
           </div>
         </div>
         <div className="flex flex-col w-full just items-center h-[180px] overflow-y-auto">
-          {viewFriends.map((it) => (
-            <div
-              key={it.friend}
-              className="cursor-pointer p-2 text-white hover:bg-[#303030]  border-b-[#505050] border-b-2 w-full"
-            >
-              {it.friend}
+          {viewFriends.length ? (
+            viewFriends.map((it) => (
+              <div
+                key={it.friend}
+                className="cursor-pointer p-2 text-white hover:bg-[#303030]  border-b-[#505050] border-b-2 w-full"
+              >
+                {it.friend}
+              </div>
+            ))
+          ) : (
+            <div className="flex h-[180px] items-center">
+              There is no friends.
             </div>
-          ))}
+          )}
         </div>
       </div>
     </div>

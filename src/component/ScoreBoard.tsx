@@ -25,7 +25,7 @@ function formatNumberWithCommas(number: number, locale = "en-US") {
 const ScoreBoard: React.FC<ScoreBoardProps> = ({ tapUnit, gdp, passive }) => {
   return (
     <>
-      <div className="flex flex-col-3 gap-3 justify-center px-3">
+      <div className="flex flex-col-3 gap-3 justify-center px-3 ">
         <div className="group grid grid-col-2 w-1/3  grid-col-1 rounded-lg bg-gradient-to-b from-[#E39431] to-pink-100 pt-[1px] px-[1px]">
           <div className="group w-full rounded-lg transition relative duration-300 cursor-pointer hover:translate-y-[3px] hover:shadow-[0 -8px 0px 0px #2196f3] bg-[#414141] py-2 px-[2px] h-[80px]  items-center justify-center flex flex-col gap-2">
             <h1 className="text-small text-[#eeeeee]">Earn per Tap</h1>

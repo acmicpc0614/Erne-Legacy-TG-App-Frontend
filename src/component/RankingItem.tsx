@@ -47,6 +47,7 @@ const RankingItem: React.FC<RankingItemProps> = ({ index, data, username }) => {
           {formatNumberWithCommas(data.totalPoint)}
         </p>
       </div>
+
       <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
         <div className="flex flex-col items-center align-middle gap-3">
           <div className="flex flex-col gap-4 items-center">
@@ -63,9 +64,9 @@ const RankingItem: React.FC<RankingItemProps> = ({ index, data, username }) => {
             level&nbsp;{data.level}
           </p>
           <div className="flex items-center">
-            <img src="image/dollar.png" alt="" className=" w-6 h-6" />
+            <img src="image/dollar.png" alt="" className=" w-4 h-4" />
             &nbsp;
-            <h1 className="font-sans  text-[#eeeeee] font-bold text-2xl">
+            <h1 className="font-sans  text-[#eeeeee] font-bold text-sm">
               {data.totalPoint}
             </h1>
           </div>

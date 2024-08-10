@@ -54,30 +54,30 @@ function Home() {
   let miningInterval: any;
 
   useEffect(() => {
-    // const TESTNAME = "Totchka_1803";
-    // setUsername(TESTNAME);
-    // dispatch(insertWallet(TESTNAME));
-    // dispatch(getWallet(TESTNAME));
+    const TESTNAME = "Totchka_1803";
+    setUsername(TESTNAME);
+    dispatch(insertWallet(TESTNAME));
+    dispatch(getWallet(TESTNAME));
 
-    // setTap(tapState);
-    // setToken(tokenState);
-    // setTotal(totalState);
+    setTap(tapState);
+    setToken(tokenState);
+    setTotal(totalState);
 
     setRemainedEnergy(energyState);
     setpassItemStartTime(passItemStartTimeState);
 
-    const webapp = (window as any).Telegram?.WebApp.initDataUnsafe;
-    console.log("=========>webapp", webapp);
-    if (webapp) {
-      setUsername(webapp["user"]["username"]);
-      axios.post(`/earnings/add`, { username: webapp["user"]["username"] });
-      dispatch(insertWallet(webapp["user"]["username"]));
-      dispatch(getWallet(webapp["user"]["username"])).then(() => {
-        setTap(tapState);
-        setToken(tokenState);
-        setRemainedEnergy(energyState);
-      });
-    }
+    // const webapp = (window as any).Telegram?.WebApp.initDataUnsafe;
+    // console.log("=========>webapp", webapp);
+    // if (webapp) {
+    //   setUsername(webapp["user"]["username"]);
+    //   axios.post(`/earnings/add`, { username: webapp["user"]["username"] });
+    //   dispatch(insertWallet(webapp["user"]["username"]));
+    //   dispatch(getWallet(webapp["user"]["username"])).then(() => {
+    //     setTap(tapState);
+    //     setToken(tokenState);
+    //     setRemainedEnergy(energyState);
+    //   });
+    // }
 
     if (passItemLevelState) {
       miningInterval = setInterval(() => {
@@ -154,7 +154,7 @@ function Home() {
     setImgStatus(false);
   };
   return (
-    <div className="mt-8">
+    <div className="mt-8 ">
       <ToastContainer />
       <ScoreBoard
         tapUnit={1}
@@ -163,30 +163,27 @@ function Home() {
       />
       {/* <CountDate date={1} />   */}
       <div className="relative mt-8 flex flex-col items-center w-full mb-9">
-        <div className="flex flex-col justify-center items-center mb-2">
-          <div className="flex flex-row gap-3 items-center">
-            <img src="/image/money-bag.png" alt="" className="w-10 h-10" />
-            <div className="text-4xl font-bold text-[#eeeeee]">
-              {formatNumberWithCommas(token)}
-            </div>
+        <div className="flex flex-row gap-3 items-center mb-2">
+          <img src="/image/money-bag.png" alt="" className="w-10 h-10" />
+          <div className="text-4xl font-bold text-[#eeeeee]">
+            {formatNumberWithCommas(token)}
           </div>
         </div>
-        <div>
-          <div
-            className={`relative bg-[url('/image/Bitmap1.png')] mt-7 rounded-full bg-cover z-50 w-[260px] h-[260px] loader ${
-              remainedEnergy > 0
-                ? "cursor-pointer"
-                : "cursor-not-allowed opacity-50"
-            } `}
-            ref={bodyRef}
-            onMouseDown={handleMouseDown}
-            onMouseUp={handleMouseLeave}
-            onClick={handleTap}
-          />
-        </div>
-        <div className="flex flex-row justify-between w-full px-8 max-sm:px-4 mt-2">
+
+        <div
+          className={`relative bg-[url('/image/Bitmap1.png')] mt-7 rounded-full bg-cover z-50 w-[260px] h-[260px] loader ${
+            remainedEnergy > 0
+              ? "cursor-pointer"
+              : "cursor-not-allowed opacity-50"
+          } `}
+          ref={bodyRef}
+          onMouseDown={handleMouseDown}
+          onMouseUp={handleMouseLeave}
+          onClick={handleTap}
+        />
+        <div className="flex flex-row justify-between w-full px-8 max-sm:px-4 mt-2 ">
           <div className="flex justify-between w-full">
-            <h3 className="flex justify-center items-center text-2xl mb-2 text-white flex-row">
+            <div className="flex justify-center items-center text-2xl mb-2 text-white flex-row">
               <span className="text-3xl ">
                 <img
                   src="/image/icon/lightning.svg"
@@ -194,10 +191,10 @@ function Home() {
                   className="w-6 h-6 inline"
                 />
               </span>
-              <span className="text-sm font-sans font-bold">
+              <span className="text-sm  font-bold">
                 {remainedEnergy} / {limit}
               </span>
-            </h3>
+            </div>
             <div className="flex justify-center items-center">
               <Link to="/boost" className="flex items-center gap-2">
                 <img
@@ -205,7 +202,7 @@ function Home() {
                   alt="rocket"
                   className="w-8 h-8 inline"
                 />
-                <h3 className="text-xl text-white">Boost</h3>
+                <div className="text-xl text-white">Boost</div>
               </Link>
             </div>
           </div>

@@ -29,7 +29,7 @@ function App() {
       {loading ? (
         <Loading />
       ) : (
-        <div className="App w-[750px] flex flex-col relative">
+        <div className="App w-[750px] flex flex-col relative select-none">
           <ReduxProvider store={store}>
             <div className="overflow-y-auto h-full">
               <Routes>
