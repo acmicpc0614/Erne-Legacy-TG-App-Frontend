@@ -24,6 +24,7 @@
   padding: 20px;
   box-sizing: border-box;
   border-radius: 16px;
+  max-width: 280px;
 }
 
 .modal-content:hover {
@@ -42,4 +43,19 @@
   color: rgb(240, 163, 21);
   text-decoration: none;
   cursor: pointer;
+}
+
+@keyframes fadePosUp {
+  from {
+    opacity: 0;
+    transform: translateY(100px); /* Start from below */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0); /* End in the original position */
+  }
+}
+
+.animate-fade-up {
+  animation: fadePosUp 0.5s forwards;
 }

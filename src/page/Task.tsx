@@ -82,8 +82,8 @@ export default function Task() {
         // await axios.post(`/wallet/getDailyEarn/telegram`).then((res) => {
         if (res.status === 200) {
           dispatch(updateBalance(username, balance + 1000));
-          toast.success("You have received +1000 daily Earning successfully!");
-          CreateEffect(bodyRef, 1000, "ADD", "70%", "100px");
+          // toast.success("You have received +1000 daily Earning successfully!");
+          CreateEffect(bodyRef, 1000, "ADD", "70%", "180px");
           setTargetData(Date.now() + DAY);
         } else
           toast.info(

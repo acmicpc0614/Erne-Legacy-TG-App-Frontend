@@ -18,8 +18,8 @@ const RankingItem: React.FC<RankingItemProps> = ({ index, data, username }) => {
           username !== data.username
             ? "bg-[#363636] hover:bg-[#5f5f5f]"
             : "bg-[#54706f] hover:bg-[#383f3f]"
-        }  border-l-[#ffb14a] border-l-[4px] border-transparent rounded-xl gap-2 opacity-0 transition-opacity duration-1000 delay-1000`}
-        style={{ animation: `fadeIn ${index}s forwards` }}
+        }  border-l-[#ffb14a] border-l-[4px] border-transparent rounded-xl gap-2 opacity-0 transition-opacity duration-500 delay-1000 ease-in-out`}
+        style={{ animation: `fadeIn  ${index / 6}s forwards` }}
         onClick={handleClick}
       >
         <div className="text-xl text-start w-[20%] font-sans text-[#eeeeee] font-bold flex justify-center align-middle">
@@ -49,7 +49,7 @@ const RankingItem: React.FC<RankingItemProps> = ({ index, data, username }) => {
       </div>
       <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
         <div className="flex flex-col items-center align-middle gap-3">
-          <div className="flex flex-row gap-4 items-center">
+          <div className="flex flex-col gap-4 items-center">
             <img
               src="/image/Bitmap3.png"
               alt="avatar"
