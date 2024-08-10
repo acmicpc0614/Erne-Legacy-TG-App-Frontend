@@ -1,7 +1,7 @@
 import RankingItem from "./RankingItem";
 const RankingList: React.FC<RankingListProps> = ({ usersa, username }) => {
   return (
-    <div className="md:w-full h-[70vh] mx-auto px-4">
+    <div className="md:w-full h-[70vh] mx-auto px-4 ">
       <div className=" overflow-auto">
         {usersa.map((data: any, idx: any) => (
           <div key={idx}>

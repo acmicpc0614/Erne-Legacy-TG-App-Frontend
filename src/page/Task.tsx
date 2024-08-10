@@ -13,7 +13,7 @@ export default function Task() {
   const [username, setUsername] = useState<string>(username_state);
   const [balance, setBalance] = useState<number>(balance_state);
 
-  const DAY = 10 * 1000;
+  const DAY = 20 * 1000;
   // const DAY = 86400 * 1000;
   const [targetDate, setTargetData] = useState<number>(dailyEarnTime + DAY);
 

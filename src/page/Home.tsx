@@ -53,30 +53,30 @@ function Home() {
   let miningInterval: any;
 
   useEffect(() => {
-    // const TESTNAME = "AAAAAA";
-    // setUsername(TESTNAME);
-    // dispatch(insertWallet(TESTNAME));
-    // dispatch(getWallet(TESTNAME));
+    const TESTNAME = "user 1";
+    setUsername(TESTNAME);
+    dispatch(insertWallet(TESTNAME));
+    dispatch(getWallet(TESTNAME));
 
-    // setTap(tapState);
-    // setToken(tokenState);
-    // setTotal(totalState);
+    setTap(tapState);
+    setToken(tokenState);
+    setTotal(totalState);
 
-    // setRemainedEnergy(energyState);
-    // setpassItemStartTime(passItemStartTimeState);
+    setRemainedEnergy(energyState);
+    setpassItemStartTime(passItemStartTimeState);
 
-    const webapp = (window as any).Telegram?.WebApp.initDataUnsafe;
-    console.log("=========>webapp", webapp);
-    if (webapp) {
-      setUsername(webapp["user"]["username"]);
-      axios.post(`/earnings/add`, { username: webapp["user"]["username"] });
-      dispatch(insertWallet(webapp["user"]["username"]));
-      dispatch(getWallet(webapp["user"]["username"])).then(() => {
-        setTap(tapState);
-        setToken(tokenState);
-        setRemainedEnergy(energyState);
-      });
-    }
+    // const webapp = (window as any).Telegram?.WebApp.initDataUnsafe;
+    // console.log("=========>webapp", webapp);
+    // if (webapp) {
+    //   setUsername(webapp["user"]["username"]);
+    //   axios.post(`/earnings/add`, { username: webapp["user"]["username"] });
+    //   dispatch(insertWallet(webapp["user"]["username"]));
+    //   dispatch(getWallet(webapp["user"]["username"])).then(() => {
+    //     setTap(tapState);
+    //     setToken(tokenState);
+    //     setRemainedEnergy(energyState);
+    //   });
+    // }
 
     if (passItemLevelState) {
       miningInterval = setInterval(() => {
@@ -199,7 +199,7 @@ function Home() {
         <div className="flex flex-col justify-center items-center mb-2">
           <div className="flex flex-row gap-3 items-center">
             <img src="/image/money-bag.png" alt="" className="w-10 h-10" />
-            <div className="text-2xl font-bold text-[#eeeeee]">
+            <div className="text-4xl font-bold text-[#eeeeee]">
               {formatNumberWithCommas(token)}
             </div>
           </div>
@@ -232,9 +232,9 @@ function Home() {
               </span>
             </h3>
             <div className="flex justify-center items-center">
-              <Link to="/boost" className="flex">
+              <Link to="/boost" className="flex items-center gap-2">
                 <img
-                  src="/image/rocket.png"
+                  src="/image/quest.png"
                   alt="rocket"
                   className="w-8 h-8 inline"
                 />

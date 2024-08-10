@@ -9,7 +9,7 @@ export default function Footer() {
     setPath(location.pathname);
   }, [location]);
   return (
-    <div className="flex flex-row gap-10 justify-around items-center bottom-0  w-full h-[70px] pt-[10px] px-5 bg-gray-700 rounded-xl absolute z-[9999]">
+    <div className="flex flex-row gap-10 justify-around items-center bottom-0  w-full h-[70px] pt-[10px] px-5 bg-[#292929] rounded-xl absolute z-[1000]">
       <Link
         to="/ranking"
         className={`flex flex-col items-center justify-center cursor-pointer transform origin-bottom transition ${

@@ -5,7 +5,7 @@ import Modal from "./modal";
 const RankingItem: React.FC<RankingItemProps> = ({ index, data, username }) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const handleClick = () => {
-    setIsModalOpen(true);
+    setIsModalOpen(false);
   };
   const handleCloseModal = () => {
     setIsModalOpen(false);
