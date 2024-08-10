@@ -1,8 +1,8 @@
 import { dispatch, useSelector } from "../store";
 import { toast, ToastContainer } from "react-toastify";
 import {
-  // buyBonusCard,
-  // updateBalance,
+  buyBonusCard,
+  updateBalance,
   updateEnergy,
   // updateLimit,
   // updateTap,
@@ -40,14 +40,14 @@ export default function Boost() {
 
   const handleBonusClick = () => {
     try {
-      // if (token < 1000) {
-      //   toast.error(
-      //     "There isn't enough tokens. You need 1000 tokens to purchase a card. Please check your"
-      //   );
-      //   return;
-      // }
-      // dispatch(buyBonusCard(username, token - 1000));
-      // dispatch(updateBalance(username, token - 1000));
+      if (token < 1000) {
+        toast.error(
+          "There isn't enough tokens. You need 1000 tokens to purchase a card. Please check your"
+        );
+        return;
+      }
+      dispatch(buyBonusCard(username, token - 1000));
+      dispatch(updateBalance(username, token - 1000));
       setIsBonusModalOpen(false);
       // toast.success("Successfully purchase card.");
       CreateEffect(bodyRef, 1000, "", "70%", "100px");
