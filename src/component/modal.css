@@ -14,26 +14,32 @@
 }
 
 .modal-content {
-  background-color: #242424;
-  padding: 20px;
-  border: 1px solid #888;
   width: fit-content;
   height: fit-content;
+  /* background: linear-gradient(#212121, #212121) padding-box,
+    linear-gradient(145deg, transparent 35%, #e81cff, #40c9ff) border-box; */
+  background: linear-gradient(#333333, #212121) padding-box,
+    linear-gradient(145deg, transparent 35%, #ffd51c, #40ff60) border-box;
+  border: 2px solid transparent;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 16px;
+}
+
+.modal-content:hover {
+  cursor: pointer;
 }
 
 .close-button {
-  position: absolute;
-  color: #ffbc40;
-  right: 20px;
-  top: 10px;
-  font-size: 34px;
+  color: #aaa;
+  float: right;
+  font-size: 28px;
   font-weight: bold;
-  border-radius: 50%;
 }
 
 .close-button:hover,
 .close-button:focus {
-  color: black;
+  color: rgb(240, 163, 21);
   text-decoration: none;
   cursor: pointer;
 }

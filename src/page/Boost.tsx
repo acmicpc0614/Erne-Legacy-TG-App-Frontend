@@ -28,26 +28,11 @@ export default function Boost() {
     setTap(tap_state);
   }, [tokenState, username_state, limit_state, tap_state]);
   const handleFullEnergy = () => {
-    // console.log(
-    //   "-----full energy💰🏆💪------>",
-    //   limit_state,
-    //   username ? username : "telegram"
-    // );
-
     dispatch(updateEnergy(username, limit));
     toast.success("Successfully updated energy!");
     setIsModalOpen(false);
   };
-  // const handleMultiTap = () => {
-  //   dispatch(updateTap(username, tap * 2));
-  //   setIsTapModalOpen(false);
-  //   toast.success("Successfully updated tap!");
-  // };
-  // const handleLimit = () => {
-  //   dispatch(updateLimit(username, limit * 2));
-  //   setIsLimitModalOpen(false);
-  //   toast.success("Successfully updated limit!");
-  // };
+
   const handleBonusClick = () => {
     if (token < 1000) {
       toast.error(
@@ -67,22 +52,6 @@ export default function Boost() {
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
-
-  // const [isTapModalOpen, setIsTapModalOpen] = useState<boolean>(false);
-  // const handleMouseTapClick = () => {
-  //   setIsTapModalOpen(true);
-  // };
-  // const handleCloseTapModal = () => {
-  //   setIsTapModalOpen(false);
-  // };
-
-  // const [isLimitModalOpen, setIsLimitModalOpen] = useState<boolean>(false);
-  // const handleMouseLimitClick = () => {
-  //   setIsLimitModalOpen(true);
-  // };
-  // const handleCloseLimitModal = () => {
-  //   setIsLimitModalOpen(false);
-  // };
 
   const [isBonusModalOpen, setIsBonusModalOpen] = useState<boolean>(false);
   const handleMouseBonusClick = () => {
@@ -109,7 +78,7 @@ export default function Boost() {
           <h1 className="text-white text-xl">Free daily boosters</h1>
         </div>
         <div
-          className={`flex my-3 px-5 py-3 items-center bg-[#4d4d4c] rounded-[30px] hover:bg-[#3a3a3a]`}
+          className={`flex my-3 px-5 py-3 items-center bg-[#4d4d4c] hover:cursor-pointer border-l-[#ffb14a] border-l-[4px] border-transparent rounded-xl hover:bg-[#3a3a3a]`}
           onClick={handleMouseClick}
         >
           <img src="/image/icon/lightning.svg" alt="" className="w-10 h-10" />
@@ -122,35 +91,8 @@ export default function Boost() {
           <h1 className="text-white text-xl">Boosters</h1>
         </div>
 
-        {/* <div
-          className={`flex my-3 px-5 py-3 items-center bg-[#4d4d4c] rounded-[30px] gap-2 hover:bg-[#3a3a3a]`}
-          onClick={handleMouseTapClick}
-        >
-          <img src="/image/double-tap.png" alt="" className="w-10 h-10" />
-          <div className="flex flex-col gap-1">
-            <h3 className="text-2xl text-white text-left">Multitap</h3>
-            <div className="flex gap-3 align-middle">
-              <img src="/image/dollar.png" alt="" className="w-5 h-5" />
-              <h3>2K * 2M</h3>
-            </div>
-          </div>
-        </div>
         <div
-          className={`flex my-3 px-5 py-3 items-center bg-[#4d4d4c] rounded-[30px] gap-2 hover:bg-[#3a3a3a]`}
-          onClick={handleMouseLimitClick}
-        >
-          <img src="/image/battery.png" alt="" className="w-10 h-10" />
-          <div className="flex flex-col gap-1">
-            <h3 className="text-2xl text-white text-left">Energy limit</h3>
-            <div className="flex gap-3 align-middle">
-              <img src="/image/dollar.png" alt="" className="w-5 h-5" />
-              <h3>2K * 2M</h3>
-            </div>
-          </div>
-        </div> */}
-
-        <div
-          className={`flex my-3 px-5 py-3 items-center bg-[#4d4d4c] rounded-[30px] gap-2 hover:bg-[#3a3a3a]`}
+          className={`flex my-3 px-5 py-3 items-center bg-[#4d4d4c] hover:cursor-pointer border-l-[#ffb14a] border-l-[4px] border-transparent rounded-xl gap-2 hover:bg-[#3a3a3a]`}
           onClick={handleMouseBonusClick}
         >
           <img src="/image/bonus.png" alt="" className="w-10 h-10" />
@@ -164,7 +106,7 @@ export default function Boost() {
         </div>
 
         <div
-          className={`flex my-3 px-5 py-3 items-center bg-[#4d4d4c] rounded-[30px] gap-2 hover:bg-[#3a3a3a]`}
+          className={`flex my-3 px-5 py-3 items-center bg-[#4d4d4c] hover:cursor-pointer border-l-[#ffb14a] border-l-[4px] border-transparent rounded-xl gap-2 hover:bg-[#3a3a3a]`}
         >
           <img src="/image/double-tap.png" alt="" className="w-10 h-10" />
           <div className="flex flex-col gap-1">
@@ -197,44 +139,6 @@ export default function Boost() {
           </div>
         </div>
       </Modal>
-      {/* <Modal isOpen={isTapModalOpen} onClose={handleCloseTapModal}>
-        <div className="flex flex-col items-center align-middle gap-3">
-          <img src="image/double-tap.png" alt="" className=" w-12 h-12" />
-          <h1 className="text-2xl text-white">Multi-Tap</h1>
-          <p className=" text-sm text-white">
-            Select the Multi-tap, can get the token x 2
-          </p>
-          <div className="flex items-center">
-            <img src="image/dollar.png" alt="" className=" w-14 h-14" />
-            <h1 className="text-white text-2xl">FREE</h1>
-          </div>
-          <div
-            className="w-full h-9 bg-indigo-600 text-white rounded-[20px] flex justify-center items-center"
-            onClick={handleMultiTap}
-          >
-            <span className="flex justify-center items-center">Go ahead</span>
-          </div>
-        </div>
-      </Modal>
-      <Modal isOpen={isLimitModalOpen} onClose={handleCloseLimitModal}>
-        <div className="flex flex-col items-center align-middle gap-3">
-          <img src="image/battery.png" alt="" className=" w-12 h-12" />
-          <h1 className="text-2xl text-white">Energy Limit</h1>
-          <p className=" text-sm text-white">
-            You can increase the Energy Limit, can get the energy x 2
-          </p>
-          <div className="flex items-center">
-            <img src="image/dollar.png" alt="" className=" w-14 h-14" />
-            <h1 className="text-white text-2xl">FREE</h1>
-          </div>
-          <div
-            className="w-full h-9 bg-indigo-600 text-white rounded-[20px] flex justify-center items-center"
-            onClick={handleLimit}
-          >
-            <span className="flex justify-center items-center">Go ahead</span>
-          </div>
-        </div>
-      </Modal> */}
       <Modal isOpen={isBonusModalOpen} onClose={handleCloseBonusModal}>
         <div className="flex flex-col items-center align-middle gap-3">
           <img src="image/bonus.png" alt="" className=" w-12 h-12" />
