@@ -1,9 +1,10 @@
 import axios from "../utils/api";
 import { useSelector, dispatch } from "../store";
 import { updateBalance } from "../store/reducers/wallet";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import CountdownTimer from "../component/CountDownTimer";
+import { CreateEffect } from "../component/MoneyUpdateEffect";
 export default function Task() {
   const username_state = useSelector((state) => state.wallet.user?.username);
   const balance_state = useSelector((state) => state.wallet.user?.balance);
@@ -12,6 +13,8 @@ export default function Task() {
   );
   const [username, setUsername] = useState<string>(username_state);
   const [balance, setBalance] = useState<number>(balance_state);
+
+  const bodyRef = useRef<HTMLDivElement>(null);
 
   const DAY = 20 * 1000;
   // const DAY = 86400 * 1000;
@@ -80,7 +83,7 @@ export default function Task() {
         if (res.status === 200) {
           dispatch(updateBalance(username, balance + 1000));
           toast.success("You have received +1000 daily Earning successfully!");
-          // setTargetData(Date.now() - (Date.now() % TESTMINUTE) + TESTMINUTE);
+          CreateEffect(bodyRef, 1000, "ADD", "70%", "100px");
           setTargetData(Date.now() + DAY);
         } else
           toast.info(
@@ -105,6 +108,7 @@ export default function Task() {
         <div
           className="flex px-3 h-[75px] items-center bg-[#363636] hover:bg-[#5f5f5f]  border-l-[#ffb14a] border-l-[4px] border-transparent rounded-2xl "
           onClick={handleGetDailyEarning}
+          ref={bodyRef}
         >
           <div className="flex justify-start items-center gap-4">
             <img src="image/cdollar.png" alt="" className=" w-10 h-10" />

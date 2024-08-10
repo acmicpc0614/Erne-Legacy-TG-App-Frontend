@@ -17,6 +17,7 @@ import {
 } from "../store/reducers/wallet";
 import ScoreBoard from "../component/ScoreBoard";
 import axios from "axios";
+import { CreateEffect } from "../component/MoneyUpdateEffect";
 
 function Home() {
   const PassItemCount = [0, 1, 2, 3, 4, 5];
@@ -53,30 +54,30 @@ function Home() {
   let miningInterval: any;
 
   useEffect(() => {
-    // const TESTNAME = "user 1";
-    // setUsername(TESTNAME);
-    // dispatch(insertWallet(TESTNAME));
-    // dispatch(getWallet(TESTNAME));
+    const TESTNAME = "user 2";
+    setUsername(TESTNAME);
+    dispatch(insertWallet(TESTNAME));
+    dispatch(getWallet(TESTNAME));
 
-    // setTap(tapState);
-    // setToken(tokenState);
-    // setTotal(totalState);
+    setTap(tapState);
+    setToken(tokenState);
+    setTotal(totalState);
 
-    // setRemainedEnergy(energyState);
-    // setpassItemStartTime(passItemStartTimeState);
+    setRemainedEnergy(energyState);
+    setpassItemStartTime(passItemStartTimeState);
 
-    const webapp = (window as any).Telegram?.WebApp.initDataUnsafe;
-    console.log("=========>webapp", webapp);
-    if (webapp) {
-      setUsername(webapp["user"]["username"]);
-      axios.post(`/earnings/add`, { username: webapp["user"]["username"] });
-      dispatch(insertWallet(webapp["user"]["username"]));
-      dispatch(getWallet(webapp["user"]["username"])).then(() => {
-        setTap(tapState);
-        setToken(tokenState);
-        setRemainedEnergy(energyState);
-      });
-    }
+    // const webapp = (window as any).Telegram?.WebApp.initDataUnsafe;
+    // console.log("=========>webapp", webapp);
+    // if (webapp) {
+    //   setUsername(webapp["user"]["username"]);
+    //   axios.post(`/earnings/add`, { username: webapp["user"]["username"] });
+    //   dispatch(insertWallet(webapp["user"]["username"]));
+    //   dispatch(getWallet(webapp["user"]["username"])).then(() => {
+    //     setTap(tapState);
+    //     setToken(tokenState);
+    //     setRemainedEnergy(energyState);
+    //   });
+    // }
 
     if (passItemLevelState) {
       miningInterval = setInterval(() => {
@@ -113,46 +114,13 @@ function Home() {
   }
 
   const bodyRef = useRef<HTMLDivElement>(null);
-  const [score, setScore] = useState<string>(`+${tap}`);
   const handleTapClick = (event: React.MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
     const rect = event.currentTarget.getBoundingClientRect();
-    const x = Math.random() * (event.clientX - rect.left);
-    const y = Math.random() * (event.clientY - rect.top);
+    const x = Math.random() * (event.clientX - rect.left) + "px";
+    const y = Math.random() * (event.clientY - rect.top) + "px";
 
-    const styleElement = document.createElement("style");
-    document.head.appendChild(styleElement);
-
-    styleElement.sheet &&
-      styleElement.sheet.insertRule(
-        "@keyframes fade-out-top-right {0% {opacity: 1; transform: translateY(0); } 100% {opacity: 0;transform: translateY(-100%);}}",
-        0
-      );
-
-    const newDiv = document.createElement("div");
-    newDiv.textContent = `${score}`;
-    newDiv.style.backgroundImage = "url('image/dollar.png')";
-    newDiv.style.backgroundRepeat = "no-repeat";
-    newDiv.style.backgroundPosition = "center";
-    newDiv.style.fontSize = "30px";
-    newDiv.style.paddingLeft = "30px";
-    newDiv.style.display = "flex";
-    newDiv.style.justifyContent = "center";
-    newDiv.style.alignItems = "center";
-    newDiv.style.backgroundSize = "cover";
-    newDiv.style.width = "40px";
-    newDiv.style.height = "40px";
-    newDiv.style.position = "absolute";
-    newDiv.style.left = `${x + 50}px`;
-    newDiv.style.top = `${y}px`;
-    newDiv.style.color = score == "+1" ? "#58E1E2" : "red";
-    newDiv.className =
-      "dynamic-div animate-fadeouttopright transform max-sm:text-3xl text-5xl font-bold transition not-selectable";
-
-    bodyRef.current && bodyRef.current.appendChild(newDiv);
-    const interval = setTimeout(() => newDiv && newDiv.remove(), 1000);
-
-    return () => clearTimeout(interval);
+    CreateEffect(bodyRef, tap, "ADD", x, y);
   };
 
   useEffect(() => {
@@ -169,7 +137,6 @@ function Home() {
     // console.log("handleTap =>", username, total, token, remainedEnergy, tap);
     audio.play();
     if (remainedEnergy > 0) {
-      setScore(`+${tap}`);
       setToken(token + tap);
       setTotal(total + tap);
       dispatch(

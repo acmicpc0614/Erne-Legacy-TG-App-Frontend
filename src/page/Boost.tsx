@@ -7,8 +7,10 @@ import {
   // updateLimit,
   // updateTap,
 } from "../store/reducers/wallet";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Modal from "../component/modal";
+import { CreateEffect } from "../component/MoneyUpdateEffect";
+
 export default function Boost() {
   const tokenState = useSelector((state) => state.wallet.user?.balance);
   const username_state = useSelector((state) => state.wallet.user?.username);
@@ -20,6 +22,8 @@ export default function Boost() {
   const [limit, setLimit] = useState<number>(limit_state);
   const [tap, setTap] = useState<number>(tap_state);
 
+  const bodyRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     console.log(tap);
     setToken(tokenState);
@@ -27,6 +31,7 @@ export default function Boost() {
     setLimit(limit_state);
     setTap(tap_state);
   }, [tokenState, username_state, limit_state, tap_state]);
+
   const handleFullEnergy = () => {
     dispatch(updateEnergy(username, limit));
     toast.success("Successfully updated energy!");
@@ -34,16 +39,21 @@ export default function Boost() {
   };
 
   const handleBonusClick = () => {
-    if (token < 1000) {
-      toast.error(
-        "There isn't enough tokens. You need 1000 tokens to purchase a card. Please check your"
-      );
-      return;
+    try {
+      // if (token < 1000) {
+      //   toast.error(
+      //     "There isn't enough tokens. You need 1000 tokens to purchase a card. Please check your"
+      //   );
+      //   return;
+      // }
+      // dispatch(buyBonusCard(username, token - 1000));
+      // dispatch(updateBalance(username, token - 1000));
+      setIsBonusModalOpen(false);
+      toast.success("Successfully purchase card.");
+      CreateEffect(bodyRef, 1000, "", "70%", "100px");
+    } catch (error) {
+      toast.error("Unknown error occurred. Please try again later.");
     }
-    dispatch(buyBonusCard(username, token - 1000));
-    dispatch(updateBalance(username, token - 1000));
-    setIsBonusModalOpen(false);
-    toast.success("Successfully purchase card.");
   };
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const handleMouseClick = () => {
@@ -78,13 +88,13 @@ export default function Boost() {
           <h1 className="text-white text-xl">Free daily boosters</h1>
         </div>
         <div
-          className={`flex my-3 px-5 py-3 items-center bg-[#4d4d4c] hover:cursor-pointer border-l-[#ffb14a] border-l-[4px] border-transparent rounded-xl hover:bg-[#3a3a3a]`}
+          className={`flex my-3 px-5 py-3 items-center bg-[#4d4d4c] hover:cursor-pointer border-l-[#ffb14a] border-l-[4px] border-transparent rounded-xl gap-2 hover:bg-[#3a3a3a]`}
           onClick={handleMouseClick}
         >
           <img src="/image/icon/lightning.svg" alt="" className="w-10 h-10" />
           <div className="flex flex-col">
-            <h3 className="text-2xl text-white">Full energy</h3>
-            <h3 className="text-xl text-[#a8a8a7]">1/1 available</h3>
+            <div className="text-xl text-white">Full energy</div>
+            <div className="text-sm text-[#a8a8a7]">1 / 1 available</div>
           </div>
         </div>
         <div className="flex justify-start">
@@ -94,13 +104,14 @@ export default function Boost() {
         <div
           className={`flex my-3 px-5 py-3 items-center bg-[#4d4d4c] hover:cursor-pointer border-l-[#ffb14a] border-l-[4px] border-transparent rounded-xl gap-2 hover:bg-[#3a3a3a]`}
           onClick={handleMouseBonusClick}
+          ref={bodyRef}
         >
           <img src="/image/bonus.png" alt="" className="w-10 h-10" />
           <div className="flex flex-col gap-1">
-            <h3 className="text-2xl text-white text-left">Passive Earnings</h3>
+            <div className="text-xl text-white text-left">Passive Earnings</div>
             <div className="flex gap-3 align-middle">
               <img src="/image/dollar.png" alt="" className="w-5 h-5" />
-              <h3>1k nessessary</h3>
+              <div className="text-sm text-[#a8a8a7]">1k nessessary</div>
             </div>
           </div>
         </div>
@@ -110,12 +121,12 @@ export default function Boost() {
         >
           <img src="/image/double-tap.png" alt="" className="w-10 h-10" />
           <div className="flex flex-col gap-1">
-            <h3 className="text-2xl text-white text-left">
+            <div className="text-xl text-white text-left">
               Upgrade Earning per Tap
-            </h3>
+            </div>
             <div className="flex gap-3 align-middle">
               <img src="/image/dollar.png" alt="" className="w-5 h-5" />
-              <h3>2k nessessary</h3>
+              <div className="text-sm text-[#a8a8a7]">2k nessessary</div>
             </div>
           </div>
         </div>
@@ -123,12 +134,12 @@ export default function Boost() {
       <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
         <div className="flex flex-col items-center align-middle gap-3">
           <img src="image/icon/lightning.svg" alt="" className=" w-12 h-12" />
-          <h1 className="text-2xl text-white">Full energy</h1>
+          <h1 className="text-xl text-white">Full energy</h1>
           <p className=" text-sm text-white">
             Recharge your energy to the maximum and do another round of mining
           </p>
-          <div className="flex items-center">
-            <img src="image/dollar.png" alt="" className=" w-14 h-14" />
+          <div className="flex items-center gap-4">
+            <img src="image/dollar.png" alt="" className=" w-8 h-8" />
             <h1 className="text-white text-2xl">FREE</h1>
           </div>
           <div
@@ -146,9 +157,9 @@ export default function Boost() {
           <p className=" text-sm text-white">
             You can get bonus coins with combo cards.
           </p>
-          <div className="flex items-center">
-            <img src="image/dollar.png" alt="" className=" w-14 h-14" />
-            <h1 className="text-white text-2xl">&nbsp;1000</h1>
+          <div className="flex items-center gap-4">
+            <img src="image/dollar.png" alt="" className=" w-8 h-8" />
+            <h1 className="text-white text-2xl">&nbsp;-1000</h1>
           </div>
           <div
             className="w-full h-9 bg-indigo-600 text-white rounded-[20px] flex justify-center items-center"
