@@ -8,7 +8,7 @@ import { FaSearch } from "react-icons/fa"; // Importing a search icon from react
 import { initUtils } from "@telegram-apps/sdk";
 
 export default function QuestList() {
-  // const utils = initUtils();
+  const utils = initUtils();
   const username_state = useSelector((state) => state.wallet.user?.username);
   const [username, setUsername] = useState<string>(username_state);
   // const [isCopied, setIsCopied] = useState(false);
@@ -29,7 +29,7 @@ export default function QuestList() {
       "OurApp: Your first crypto wealth. Join, share, and earn airdrops!";
     let fullURL = `https://t.me/share/url?url=${tmpURL}&text=${tmpTEXT}`;
     // console.log("fullURL =>", fullURL);
-    // utils.openTelegramLink(fullURL);
+    utils.openTelegramLink(fullURL);
   };
   const handleCopy = async () => {
     toast.success("Copied to clipboard!");
@@ -83,8 +83,8 @@ export default function QuestList() {
         <p className=" text-white">You and your friend will receive bonuses</p>
       </div>
 
-      {InviteFriendsItems.map((item) => (
-        <CopyToClipboard text={textToCopy} onCopy={item.onCopy}>
+      {InviteFriendsItems.map((item, idx) => (
+        <CopyToClipboard text={textToCopy} onCopy={item.onCopy} key={idx}>
           <div className="flex items-center h-20 max-sm:h-20 justify-start px-3 py-2 my-4 bg-[#363636] hover:bg-[#5f5f5f]  border-l-[#ffb14a] border-l-[4px] border-transparent rounded-2xl hover:cursor-pointer">
             <img src={item.icon} alt={item.label} className=" w-12 h-12" />
             <div className=" flex flex-col justify-start">
