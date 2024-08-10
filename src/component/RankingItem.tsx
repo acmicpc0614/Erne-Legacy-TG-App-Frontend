@@ -18,7 +18,8 @@ const RankingItem: React.FC<RankingItemProps> = ({ index, data, username }) => {
           username !== data.username
             ? "bg-[#363636] hover:bg-[#5f5f5f]"
             : "bg-[#54706f] hover:bg-[#383f3f]"
-        }  border-l-[#ffb14a] border-l-[4px] border-transparent rounded-xl gap-2`}
+        }  border-l-[#ffb14a] border-l-[4px] border-transparent rounded-xl gap-2 opacity-0 transition-opacity duration-1000 delay-1000`}
+        style={{ animation: `fadeIn ${index}s forwards` }}
         onClick={handleClick}
       >
         <div className="text-xl text-start w-[20%] font-sans text-[#eeeeee] font-bold flex justify-center align-middle">
