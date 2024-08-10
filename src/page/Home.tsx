@@ -16,6 +16,7 @@ import {
   // updateEnergy,
 } from "../store/reducers/wallet";
 import ScoreBoard from "../component/ScoreBoard";
+import axios from "axios";
 
 function Home() {
   const PassItemCount = [0, 1, 2, 3, 4, 5];
@@ -52,30 +53,30 @@ function Home() {
   let miningInterval: any;
 
   useEffect(() => {
-    const TESTNAME = "AAAAAA";
-    setUsername(TESTNAME);
-    dispatch(insertWallet(TESTNAME));
-    dispatch(getWallet(TESTNAME));
+    // const TESTNAME = "AAAAAA";
+    // setUsername(TESTNAME);
+    // dispatch(insertWallet(TESTNAME));
+    // dispatch(getWallet(TESTNAME));
 
-    setTap(tapState);
-    setToken(tokenState);
-    setTotal(totalState);
+    // setTap(tapState);
+    // setToken(tokenState);
+    // setTotal(totalState);
 
-    setRemainedEnergy(energyState);
-    setpassItemStartTime(passItemStartTimeState);
+    // setRemainedEnergy(energyState);
+    // setpassItemStartTime(passItemStartTimeState);
 
-    // const webapp = (window as any).Telegram?.WebApp.initDataUnsafe;
-    // console.log("=========>webapp", webapp);
-    // if (webapp) {
-    //   setUsername(webapp["user"]["username"]);
-    //   axios.post(`/earnings/add`, { username: webapp["user"]["username"] });
-    //   dispatch(insertWallet(webapp["user"]["username"]));
-    //   dispatch(getWallet(webapp["user"]["username"])).then(() => {
-    //     setTap(tapState);
-    //     setToken(tokenState);
-    //     setRemainedEnergy(energyState);
-    //   });
-    // }
+    const webapp = (window as any).Telegram?.WebApp.initDataUnsafe;
+    console.log("=========>webapp", webapp);
+    if (webapp) {
+      setUsername(webapp["user"]["username"]);
+      axios.post(`/earnings/add`, { username: webapp["user"]["username"] });
+      dispatch(insertWallet(webapp["user"]["username"]));
+      dispatch(getWallet(webapp["user"]["username"])).then(() => {
+        setTap(tapState);
+        setToken(tokenState);
+        setRemainedEnergy(energyState);
+      });
+    }
 
     if (passItemLevelState) {
       miningInterval = setInterval(() => {
