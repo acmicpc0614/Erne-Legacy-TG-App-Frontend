@@ -54,7 +54,7 @@ function Home() {
   let miningInterval: any;
 
   useEffect(() => {
-    // const TESTNAME = "KinG!!!";
+    // const TESTNAME = "Totchka_1803";
     // setUsername(TESTNAME);
     // dispatch(insertWallet(TESTNAME));
     // dispatch(getWallet(TESTNAME));
@@ -63,8 +63,8 @@ function Home() {
     // setToken(tokenState);
     // setTotal(totalState);
 
-    // setRemainedEnergy(energyState);
-    // setpassItemStartTime(passItemStartTimeState);
+    setRemainedEnergy(energyState);
+    setpassItemStartTime(passItemStartTimeState);
 
     const webapp = (window as any).Telegram?.WebApp.initDataUnsafe;
     console.log("=========>webapp", webapp);

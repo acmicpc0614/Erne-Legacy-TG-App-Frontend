@@ -15,6 +15,7 @@ export default function QuestList() {
   // const [isCopied, setIsCopied] = useState(false);
   const [friends, setFriends] = useState<any[]>([]);
   const [viewFriends, setViewFriends] = useState<any[]>([]);
+
   const [textToCopy, setTextToCopy] = useState<string>("");
   const [searchInput, setSearchInput] = useState("");
 
@@ -43,8 +44,8 @@ export default function QuestList() {
   }, []);
 
   useEffect(() => {
-    setViewFriends(friends);
-  }, friends);
+    setViewFriends(friends ? friends : []);
+  }, [friends]);
 
   const handleSearch = (searchname: string) => {
     const lowerCaseSearchName = searchname.toLowerCase();
