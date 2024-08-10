@@ -2,6 +2,7 @@ import { dispatch, useSelector } from "../store";
 import { toast, ToastContainer } from "react-toastify";
 import {
   buyBonusCard,
+  updateBalance,
   updateEnergy,
   // updateLimit,
   // updateTap,
@@ -55,6 +56,7 @@ export default function Boost() {
       return;
     }
     dispatch(buyBonusCard(username, token - 1000));
+    dispatch(updateBalance(username, token - 1000));
     setIsBonusModalOpen(false);
     toast.success("Successfully purchase card.");
   };

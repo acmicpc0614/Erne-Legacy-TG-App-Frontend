@@ -7,19 +7,19 @@ import "react-toastify/dist/ReactToastify.css";
 import ProgressBar from "../component/ProgressBar";
 import { dispatch, useSelector } from "../store";
 import soundEffect from "../../public/effect/water.wav";
-import axios from "../utils/api";
 import {
   insertWallet,
   updateWallet,
   // updateEnergy,
   getWallet,
-  removeBonusCard,
+  // removeBonusCard,
+  // updateEnergy,
 } from "../store/reducers/wallet";
 import ScoreBoard from "../component/ScoreBoard";
 
 function Home() {
   const PassItemCount = [0, 1, 2, 3, 4, 5];
-  const PassItemLimitTime = [0, 10, 3600, 3600, 3600, 3600];
+  // const PassItemLimitTime = [0, 10, 3600, 3600, 3600, 3600];
 
   const audio = new Audio(soundEffect);
   const usernameState = useSelector((state) => state.wallet.user?.username);
@@ -51,47 +51,35 @@ function Home() {
     useState<number>(passItemLevelState);
   let miningInterval: any;
 
-  console.log(imgStatus);
-  // const [lastTime, setLastTime] = useState<number>(lastTimeState);
-
-  // const [tapUnit, setTapUnit] = useState<number>(0);
-
   useEffect(() => {
-    // const TESTNAME = "test_8";
-    // setUsername(TESTNAME);
+    const TESTNAME = "AAAAAA";
+    setUsername(TESTNAME);
+    dispatch(insertWallet(TESTNAME));
+    dispatch(getWallet(TESTNAME));
 
-    // Use username directly instead of username
-    // console.log("username1 =>", username);
-    // axios.post(`/earnings/add`, { username: username });
-    // console.log("username2 =>", username);
+    setTap(tapState);
+    setToken(tokenState);
+    setTotal(totalState);
 
-    // dispatch(insertWallet(username));
-    // console.log("username3 =>", username);
+    setRemainedEnergy(energyState);
+    setpassItemStartTime(passItemStartTimeState);
 
-    // dispatch(getWallet(username)).then(() => {
-    //   setTap(tapState);
-    //   setToken(tokenState);
-    //   setTotal(totalState);
-    //   setRemainedEnergy(energyState);
-    //   setpassItemStartTime(passItemStartTimeState);
-    // });
-    // console.log("username4 =>", username);
-    const webapp = (window as any).Telegram?.WebApp.initDataUnsafe;
-    console.log("=========>webapp", webapp);
-    if (webapp) {
-      setUsername(webapp["user"]["username"]);
-      axios.post(`/earnings/add`, { username: webapp["user"]["username"] });
-      dispatch(insertWallet(webapp["user"]["username"]));
-      dispatch(getWallet(webapp["user"]["username"])).then(() => {
-        setTap(tapState);
-        setToken(tokenState);
-        setRemainedEnergy(energyState);
-      });
-    }
+    // const webapp = (window as any).Telegram?.WebApp.initDataUnsafe;
+    // console.log("=========>webapp", webapp);
+    // if (webapp) {
+    //   setUsername(webapp["user"]["username"]);
+    //   axios.post(`/earnings/add`, { username: webapp["user"]["username"] });
+    //   dispatch(insertWallet(webapp["user"]["username"]));
+    //   dispatch(getWallet(webapp["user"]["username"])).then(() => {
+    //     setTap(tapState);
+    //     setToken(tokenState);
+    //     setRemainedEnergy(energyState);
+    //   });
+    // }
 
     if (passItemLevelState) {
       miningInterval = setInterval(() => {
-        console.log("passive mining", passItemLevel);
+        // console.log("passive mining +", passItemLevel);
         setToken((prevToken) => {
           const tmp = prevToken + PassItemCount[passItemLevel];
           return tmp;
@@ -107,16 +95,17 @@ function Home() {
       };
     }
   }, []);
+
+  // this will not used
   if (total == -1) {
     setpassItemStartTime(1);
+    console.log(passItemStartTime);
+    setpassItemLevel(-1);
   }
   useEffect(() => {
     setLimit(limitState);
+    console.log(imgStatus);
   }, [limitState]);
-
-  useEffect(() => {
-    dispatch(insertWallet(username));
-  }, [username]);
 
   function formatNumberWithCommas(number: number, locale = "en-US") {
     return new Intl.NumberFormat(locale).format(number);
@@ -165,41 +154,18 @@ function Home() {
     return () => clearTimeout(interval);
   };
 
-  const ItemAvailableCheck = () => {
-    if (
-      passItemLevel > 0 &&
-      Date.now() - passItemStartTime > PassItemLimitTime[passItemLevel] * 1000
-    ) {
-      dispatch(removeBonusCard(username, total, token));
-      setpassItemLevel(() => 0);
-      // console.log("pre passItemLevel =>", passItemLevel);
-
-      //TODO
-      // setTap(tapState);
-      // setToken(tokenState);
-      // setTotal(totalState);
-      // setRemainedEnergy(energyState);
-      // console.log("aft passItemLevel =>", passItemLevel);
-    }
-  };
-
   useEffect(() => {
     const interval = setInterval(() => {
       if (remainedEnergy < limit && remainedEnergy > 0) {
+        // energy generate per 1s
         // dispatch(updateEnergy(username, remainedEnergy + 1));
       }
-      if (total < 0) ItemAvailableCheck();
     }, 1000);
     return () => clearInterval(interval);
-    // const interval = setTimeout(() => {
-    //   if (remainedEnergy < limit && remainedEnergy > 0) {
-    //     dispatch(updateEnergy(username, remainedEnergy + 1));
-    //   }
-    // });
   }, [username, remainedEnergy, limit]);
 
   const handleTap = (event: React.MouseEvent<HTMLDivElement>) => {
-    console.log("handleTap =>", username, total, token, remainedEnergy, tap);
+    // console.log("handleTap =>", username, total, token, remainedEnergy, tap);
     audio.play();
     if (remainedEnergy > 0) {
       setScore(`+${tap}`);

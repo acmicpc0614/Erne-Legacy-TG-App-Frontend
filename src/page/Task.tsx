@@ -7,15 +7,15 @@ import CountdownTimer from "../component/CountDownTimer";
 export default function Task() {
   const username_state = useSelector((state) => state.wallet.user?.username);
   const balance_state = useSelector((state) => state.wallet.user?.balance);
+  const dailyEarnTime = useSelector(
+    (state) => state.wallet.user?.dailyEarnTime
+  );
   const [username, setUsername] = useState<string>(username_state);
   const [balance, setBalance] = useState<number>(balance_state);
 
-  const DAY = 86400 * 1000;
-  // const TESTMINUTE = 20 * 1000; // 10s
-  // const targetDate = Date.now() - (Date.now() % TESTMINUTE) + TESTMINUTE;
-  const [targetDate, setTargetData] = useState<number>(
-    Date.now() - (Date.now() % DAY) + DAY
-  );
+  const DAY = 10 * 1000;
+  // const DAY = 86400 * 1000;
+  const [targetDate, setTargetData] = useState<number>(dailyEarnTime + DAY);
 
   useEffect(() => {
     setUsername(username_state);
@@ -78,8 +78,10 @@ export default function Task() {
       await axios.post(`/wallet/getDailyEarn/${username}`).then((res) => {
         // await axios.post(`/wallet/getDailyEarn/telegram`).then((res) => {
         if (res.status === 200) {
+          dispatch(updateBalance(username, balance + 1000));
           toast.success("You have received +1000 daily Earning successfully!");
-          setTargetData(Date.now() - (Date.now() % DAY) + DAY);
+          // setTargetData(Date.now() - (Date.now() % TESTMINUTE) + TESTMINUTE);
+          setTargetData(Date.now() + DAY);
         } else
           toast.info(
             "You earned already today's daily earnings! Please try tomorrow."

@@ -68,8 +68,9 @@ export function getWallet(username: string) {
   return async () => {
     try {
       const response = await axios.post(`/wallet/${username}`);
-      if (response.status === 200)
+      if (response.status === 200) {
         dispatch(wallet?.actions?.getWalletSuccess(response?.data));
+      }
     } catch (error) {
       console.log(error);
       dispatch(wallet?.actions?.hasError(error));
@@ -78,7 +79,7 @@ export function getWallet(username: string) {
 }
 
 export function insertWallet(username: string) {
-  console.log("insertWallet function =>", username);
+  // console.log("insertWallet function =>", username);
   return async () => {
     try {
       const response = await axios.post("/wallet/add", {
@@ -113,7 +114,7 @@ export function updateWallet(
   };
 }
 export function updateEnergy(username: string, energy: number) {
-  console.log("updateEnergy function", energy);
+  // console.log("updateEnergy function", energy);
   return async () => {
     try {
       const response = await axios.post(`/wallet/updateEnergy/${username}`, {
@@ -127,7 +128,7 @@ export function updateEnergy(username: string, energy: number) {
   };
 }
 export function updateTap(username: string, tap: number) {
-  console.log("------>", tap);
+  // console.log("------>", tap);
   return async () => {
     try {
       const response = await axios.post(`/wallet/updateTap/${username}`, {
@@ -142,7 +143,7 @@ export function updateTap(username: string, tap: number) {
 }
 
 export function buyBonusCard(username: string, token: number) {
-  console.log("buyBonusCard =>");
+  // console.log("buyBonusCard =>");
   return async () => {
     try {
       const response = await axios.post(`/wallet/buyBonusCard/${username}`, {
@@ -162,7 +163,7 @@ export function removeBonusCard(
   total: number,
   token: number
 ) {
-  console.log("removeBonusCard =>");
+  // console.log("removeBonusCard =>");
   return async () => {
     try {
       const response = await axios.post(`/wallet/removeBonusCard/${username}`, {
@@ -178,7 +179,7 @@ export function removeBonusCard(
 }
 
 export function updateLimit(username: string, limit: number) {
-  console.log("------>", limit);
+  // console.log("------>", limit);
   return async () => {
     try {
       const response = await axios.post(`/wallet/updateLimit/${username}`, {

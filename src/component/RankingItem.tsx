@@ -14,7 +14,7 @@ const RankingItem: React.FC<RankingItemProps> = ({ index, data, username }) => {
   return (
     <>
       <div
-        className={`flex ${index > 0 && "my-3"} px-1 py-0 items-center ${
+        className={`flex ${index > 0 && "my-2"} px-1 py-2 items-center ${
           username !== data.username
             ? "bg-[#363636] hover:bg-[#5f5f5f]"
             : "bg-[#54706f] hover:bg-[#383f3f]"

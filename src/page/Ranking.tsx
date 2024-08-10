@@ -9,20 +9,23 @@ export default function Ranking() {
 
   const [usersa, setUsers] = useState(users_state);
   // const [userRank, setUserRank] = useState<number>(1);
+
+  useEffect(() => {
+    setUsers(users_state);
+  }, [users_state]);
+
   useEffect(() => {
     const fetchUsers = async () => {
       // console.log("getAllUsers calling... 2");
       try {
         await dispatch(getAllUsers());
-        // console.log("users_state =>", users_state);
-        setUsers(() => users_state);
       } catch (error) {
         console.error("Error fetching users:", error);
       }
     };
 
     fetchUsers();
-  }, [users_state]);
+  }, []);
 
   const findUserRank = (username: string) => {
     for (let i = 0; i < usersa.length; i++)
@@ -66,21 +69,21 @@ export default function Ranking() {
           </div>
         </div>
 
-        <div className="flex px-3 py-1 text-white text-lg font-bold justify-start align-middle overflow-y-hidden   rounded-lg shadow-lg shadow-white mb-3">
-          <div className="text-start w-[20%] flex justify-center text-sm">
+        <div className="flex px-3 py-3 text-white text-lg font-bold justify-start align-middle overflow-y-hidden   rounded-lg shadow-md shadow-gray-400 mb-5">
+          <div className="text-start w-[20%] flex justify-center text-md">
             Rank
           </div>
-          <div className="text-start w-[40%] flex justify-center text-sm">
+          <div className="text-start w-[40%] flex justify-center text-md">
             User
           </div>
-          <div className="text-start w-[60%] flex justify-end pr-4 text-sm">
+          <div className="text-start w-[60%] flex justify-end pr-4 text-md">
             Total Score
           </div>
         </div>
       </div>
 
       {users_state.length ? (
-        <div className=" overflow-y-auto">
+        <div className="overflow-y-scroll">
           <RankingList usersa={usersa} username={username} />
         </div>
       ) : (
