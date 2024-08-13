@@ -1,10 +1,15 @@
 import { useState } from "react";
-import { formatNumberWithCommas } from "../store";
+import { formatNumberWithCommas, getLevelData } from "../store";
 import Modal from "./modal";
 
 const RankingItem: React.FC<RankingItemProps> = ({ index, data, username }) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const handleClick = () => {
+  const [levelDataItem, setLevelData] = useState<any>();
+
+  const handleClick = async () => {
+    console.log(data.level);
+    setLevelData(getLevelData(data.level));
+    console.log(levelDataItem);
     setIsModalOpen(true);
   };
   const handleCloseModal = () => {
@@ -61,8 +66,18 @@ const RankingItem: React.FC<RankingItemProps> = ({ index, data, username }) => {
             </h1>
           </div>
           <p className=" text-sm font-sans  text-[#eeeeee] font-bold">
-            level&nbsp;{data.level}
+            {data.level} level
           </p>
+          {/* <p className="text-sm font-sans  text-[#eeeeee] font-bold">
+            Era: {levelDataItem?.era}
+          </p>
+          <p className="text-sm font-sans  text-[#eeeeee] font-bold">
+            citizen Role: {levelDataItem?.citizenRole}
+          </p>
+          <p className="text-sm font-sans  text-[#eeeeee] font-bold">
+            {levelDataItem?.cityDescription}
+          </p> */}
+
           <div className="flex items-center">
             <img src="image/dollar.png" alt="" className=" w-4 h-4" />
             &nbsp;

@@ -14,6 +14,7 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
+import { LevelData } from "./levelData";
 
 // project import
 import reducers from "./reducers";
@@ -80,3 +81,10 @@ export function formatNumberWithCommas(number: number, locale = "en-US") {
 
   return new Intl.NumberFormat(locale).format(tmpNumber) + " " + tmp;
 }
+
+export const getLevelData = (level: number) => {
+  if (level < 1) return LevelData[0];
+  for (let i = 0; i < LevelData.length; i++) {
+    if (level === LevelData[i].level) return LevelData[i];
+  }
+};

@@ -54,7 +54,7 @@ function Home() {
   let miningInterval: any;
 
   useEffect(() => {
-    // const TESTNAME = "Totchka_1803";
+    // const TESTNAME = "test 2";
     // setUsername(TESTNAME);
     // dispatch(insertWallet(TESTNAME));
     // dispatch(getWallet(TESTNAME));

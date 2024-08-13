@@ -106,6 +106,7 @@ export function updateWallet(
         balance: balance,
         energy: energy,
       });
+      // console.log(response);
       dispatch(wallet?.actions?.updateWalletSuccess(response?.data));
     } catch (error) {
       console.log(error);
